@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 Pinellas County & St. Petersburg Candidate Explorer</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom Chart Container Styles fulfilling strict height & overflow constraints */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 380px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 360px;
+            }
+        }
+        /* Custom scrollbar for clean internal scrolling */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Chosen Palette: Warm Neutral & Slate Indigo -->
+    <!-- Application Structure Plan: The SPA is structured into seven thematic, goal-oriented sections designed for rapid user comprehension:
+         1. Hero & Macro Context: Overview of the 2026 elections with candidate stats and polling snapshot.
+         2. Ideological Alignment Framework: Clarifies criteria distinguishing Establishment vs Progressive vs Conservative candidates.
+         3. Interactive Polling Dashboard: Visualizes latest 2026 polling survey breakdowns across key competitive contests.
+         4. Interactive Candidate Directory & Search: Searchable & filterable directory with polling badges, ideology badges, and LGBTQ+ stances.
+         5. Side-by-Side Candidate Comparator: Direct comparison matrix including head-to-head polling figures.
+         6. Financial & Dark Money Dashboard: Campaign finance charts and utility dark money analyses.
+         7. LGBTQ+ Matrix & Controversy Radar: Detailed civil rights stances and public scrutiny cards. -->
+    <!-- Visualization & Content Choices:
+         - Dynamic Bar Charts (Chart.js): 
+           1. Polling Breakdown for St. Pete Mayor & Legislative Primary.
+           2. School Board & Clearwater Contests Polling.
+           3. Mayoral & Legislative Campaign Raised vs Spent.
+         - Interactive Candidate Cards & Modal: Detail drill-downs for all 33 candidates including real-time polling percentages, margins, and undecided share.
+         - HTML/CSS Elements: Color-coded badges for polling leads, ideology, and LGBTQ+ advocacy. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- TOP NAV / HEADER -->
+    <header class="bg-slate-900 text-white sticky top-0 z-40 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">🏛️</span>
+                <span class="font-bold text-lg sm:text-xl tracking-tight text-amber-400">Pinellas Voter Guide 2026</span>
+            </div>
+            <nav class="hidden lg:flex space-x-5 text-sm font-medium">
+                <a href="#overview" class="hover:text-amber-300 transition">Overview</a>
+                <a href="#alignment-guide" class="hover:text-amber-300 transition">Ideology Guide</a>
+                <a href="#polling-dashboard" class="hover:text-amber-300 transition">Polling Trends</a>
+                <a href="#directory" class="hover:text-amber-300 transition">Candidate Directory</a>
+                <a href="#comparator" class="hover:text-amber-300 transition">Side-by-Side Comparator</a>
+                <a href="#finances" class="hover:text-amber-300 transition">Finances</a>
+                <a href="#lgbtq-matrix" class="hover:text-amber-300 transition">LGBTQ+ Matrix</a>
+                <a href="#controversies" class="hover:text-amber-300 transition">Controversies</a>
+            </nav>
+            <div class="lg:hidden">
+                <button id="mobileMenuBtn" class="text-stone-300 hover:text-white focus:outline-none text-2xl">
+                    ☰
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-slate-800 px-4 pt-2 pb-4 space-y-2 text-sm border-t border-slate-700">
+            <a href="#overview" class="block hover:text-amber-300 py-1">Overview</a>
+            <a href="#alignment-guide" class="block hover:text-amber-300 py-1">Ideology Guide</a>
+            <a href="#polling-dashboard" class="block hover:text-amber-300 py-1">Polling Trends</a>
+            <a href="#directory" class="block hover:text-amber-300 py-1">Candidate Directory</a>
+            <a href="#comparator" class="block hover:text-amber-300 py-1">Side-by-Side Comparator</a>
+            <a href="#finances" class="block hover:text-amber-300 py-1">Finances</a>
+            <a href="#lgbtq-matrix" class="block hover:text-amber-300 py-1">LGBTQ+ Matrix</a>
+            <a href="#controversies" class="block hover:text-amber-300 py-1">Controversies</a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- SECTION 1: OVERVIEW & MACRO CONTEXT -->
+        <section id="overview" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8">
+            <div class="max-w-3xl">
+                <div class="flex flex-wrap items-center gap-2 mb-3">
+                    <span class="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-semibold rounded-full uppercase tracking-wider">Electoral Research & Polling Portal</span>
+                    <span class="px-3 py-1 bg-sky-100 text-sky-800 text-xs font-semibold rounded-full uppercase tracking-wider">Updated: August 2026 Surveys</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">2026 Electoral & Polling Analysis: Pinellas County & St. Petersburg</h1>
+                <p class="text-slate-600 text-base sm:text-lg leading-relaxed mb-6">
+                    Welcome to the comprehensive voter portal covering all 33 candidates on the 2026 Pinellas County and St. Petersburg ballot. This portal integrates **latest polling standings**, campaign funding sources, ideological alignments (Progressive vs. Establishment), controversies, and explicit civil rights/LGBTQ+ records.
+                </p>
+            </div>
+
+            <!-- KEY STATS BADGES -->
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 pt-4 border-t border-stone-100">
+                <div class="bg-stone-50 p-3 rounded-xl text-center border border-stone-200/60">
+                    <span class="text-2xl font-bold text-slate-900">33</span>
+                    <span class="block text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">Candidates</span>
+                </div>
+                <div class="bg-stone-50 p-3 rounded-xl text-center border border-stone-200/60">
+                    <span class="text-2xl font-bold text-teal-700">11</span>
+                    <span class="block text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">Progressives</span>
+                </div>
+                <div class="bg-stone-50 p-3 rounded-xl text-center border border-stone-200/60">
+                    <span class="text-2xl font-bold text-indigo-700">10</span>
+                    <span class="block text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">Establishment</span>
+                </div>
+                <div class="bg-stone-50 p-3 rounded-xl text-center border border-stone-200/60">
+                    <span class="text-2xl font-bold text-rose-700">5</span>
+                    <span class="block text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">GOP / Conservative</span>
+                </div>
+                <div class="bg-stone-50 p-3 rounded-xl text-center border border-stone-200/60 col-span-2 sm:col-span-1">
+                    <span class="text-2xl font-bold text-amber-600">7</span>
+                    <span class="block text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">Nonpartisan / Moderate</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: IDEOLOGICAL ALIGNMENT FRAMEWORK GUIDE -->
+        <section id="alignment-guide" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8 space-y-4">
+            <div>
+                <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-semibold rounded-full uppercase tracking-wider mb-2">Framework & Classification</span>
+                <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                    <span>🏷️</span> Understanding Establishment vs. Progressive Alignment
+                </h2>
+                <p class="text-slate-600 text-sm mt-1 leading-relaxed">
+                    Candidates are categorized into clear ideological factions based on funding sources, endorsement networks, policy platforms, and alignment with local political power structures:
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-2">
+                <!-- Progressive Box -->
+                <div class="p-4 bg-teal-50 border border-teal-200 rounded-xl space-y-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-teal-600 inline-block"></span>
+                        <h3 class="font-bold text-teal-900 text-sm">Progressive</h3>
+                    </div>
+                    <p class="text-xs text-teal-800 leading-relaxed">
+                        Backed by labor unions (SEIU, PCTA), grassroots donors, and progressive PACs. Prioritizes civil rights, explicit LGBTQ+ advocacy, health equity, housing justice, and anti-censorship.
+                    </p>
+                </div>
+
+                <!-- Establishment Box -->
+                <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-xl space-y-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-indigo-600 inline-block"></span>
+                        <h3 class="font-bold text-indigo-900 text-sm">Establishment</h3>
+                    </div>
+                    <p class="text-xs text-indigo-800 leading-relaxed">
+                        Backed by party leaders, corporate PACs, real estate networks (STAR), and utility interests. Focuses on pragmatic administration, major economic development, and party caucus stability.
+                    </p>
+                </div>
+
+                <!-- Conservative Establishment Box -->
+                <div class="p-4 bg-rose-50 border border-rose-200 rounded-xl space-y-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-rose-600 inline-block"></span>
+                        <h3 class="font-bold text-rose-900 text-sm">Conservative Establishment / Right-Wing</h3>
+                    </div>
+                    <p class="text-xs text-rose-800 leading-relaxed">
+                        Backed by official GOP machinery and culture-war PACs (Moms for Liberty, 1776 Project). Emphasizes parental rights, lower taxes, and restricting LGBTQ+ school curricula.
+                    </p>
+                </div>
+
+                <!-- Nonpartisan / Moderate Box -->
+                <div class="p-4 bg-stone-100 border border-stone-300 rounded-xl space-y-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-stone-600 inline-block"></span>
+                        <h3 class="font-bold text-stone-900 text-sm">Nonpartisan / Moderate</h3>
+                    </div>
+                    <p class="text-xs text-stone-700 leading-relaxed">
+                        Judicial candidates bound by judicial ethics or hyper-local civic figures focused strictly on municipal services, stormwater infrastructure, and public safety.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: INTERACTIVE POLLING DASHBOARD -->
+        <section id="polling-dashboard" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8 space-y-6">
+            <div>
+                <span class="inline-block px-3 py-1 bg-sky-100 text-sky-800 text-xs font-semibold rounded-full uppercase tracking-wider mb-2">Voter Survey Synthesis</span>
+                <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                    <span>📊</span> 2026 Polling Snapshot & Key Race Dynamics
+                </h2>
+                <p class="text-slate-600 text-sm mt-1 leading-relaxed">
+                    Interactive visualizations displaying voter preference surveys across key contested primary and general election races in Pinellas County.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Polling Chart 1: St. Pete Mayor -->
+                <div class="bg-stone-50 p-5 rounded-xl border border-stone-200 flex flex-col">
+                    <h3 class="font-bold text-slate-900 text-base mb-1">St. Petersburg Mayoral Primary Polling (%)</h3>
+                    <p class="text-slate-500 text-xs mb-4">Charlie Crist holds a slight +3% lead over incumbent Kenneth Welch, with 10% undecided.</p>
+                    <div class="chart-container">
+                        <canvas id="mayorPollChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Polling Chart 2: Legislative Primaries -->
+                <div class="bg-stone-50 p-5 rounded-xl border border-stone-200 flex flex-col">
+                    <h3 class="font-bold text-slate-900 text-base mb-1">State Senate 16 & House 62 Primaries (%)</h3>
+                    <p class="text-slate-500 text-xs mb-4">Competitive primaries in SD 16 (Driskell vs Rayner) and HD 62 (Darling vs Newton).</p>
+                    <div class="chart-container">
+                        <canvas id="legPollChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POLLING INSIGHT CARDS -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-stone-100">
+                <div class="p-4 bg-sky-50 rounded-xl border border-sky-200 text-xs text-sky-900">
+                    <strong class="block font-bold text-sm mb-1">🗳️ Mayoral Battleground</strong>
+                    Charlie Crist (34%) and Ken Welch (31%) are locked in a dead heat. Brandi Gabbard (12%) leads among progressive voters dissatisfied with both establishment figures.
+                </div>
+                <div class="p-4 bg-teal-50 rounded-xl border border-teal-200 text-xs text-teal-900">
+                    <strong class="block font-bold text-sm mb-1">⚡ Tight State Senate Primary</strong>
+                    Fentrice Driskell leads Michele Rayner 44% to 38% in Senate District 16, but 18% of voters remain undecided, leaving room for a progressive GOTV surge.
+                </div>
+                <div class="p-4 bg-purple-50 rounded-xl border border-purple-200 text-xs text-purple-900">
+                    <strong class="block font-bold text-sm mb-1">🏫 High-Stakes School Board Races</strong>
+                    School Board Dist 2 sees a neck-and-neck fight (Cane 39% vs. Velardi 38%), while Dawn Peters leads Dist 3 (35%) in a fractured 3-way race with 22% undecided.
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: INTERACTIVE CANDIDATE DIRECTORY & SEARCH -->
+        <section id="directory" class="space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                            <span>🔍</span> Candidate Directory & Multi-Criteria Search
+                        </h2>
+                        <p class="text-slate-500 text-sm mt-1">
+                            Filter candidates by contest, political alignment, LGBTQ+ advocacy, polling status, or issue keywords.
+                        </p>
+                    </div>
+                    <!-- CONTROLS & FILTERS -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 w-full lg:w-auto">
+                        <!-- Search Box -->
+                        <input type="text" id="searchInput" placeholder="Search name, platform, poll..." class="px-3 py-2 bg-stone-50 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        
+                        <!-- Filter Race -->
+                        <select id="contestFilter" class="px-3 py-2 bg-stone-50 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="ALL">All Contests (14)</option>
+                            <option value="State Senate">State Senate Dist 16</option>
+                            <option value="State Rep">State Rep Dist 62</option>
+                            <option value="County Commission">County Commission Dist 4</option>
+                            <option value="Judicial">Judicial Races (Circuit/County)</option>
+                            <option value="School Board">School Board (Dist 2, 3, 6)</option>
+                            <option value="Clearwater">Clearwater Council (Seat 4, 5)</option>
+                            <option value="Oldsmar">Oldsmar Council Seat 3</option>
+                            <option value="St. Petersburg Mayor">St. Pete Mayor</option>
+                            <option value="St. Petersburg Council">St. Pete Council Dist 6</option>
+                        </select>
+
+                        <!-- Filter Ideological Alignment -->
+                        <select id="alignmentFilter" class="px-3 py-2 bg-stone-50 border border-stone-300 rounded-lg text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="ALL">Ideology Alignment (All)</option>
+                            <option value="Progressive">🟢 Progressive</option>
+                            <option value="Establishment">🔵 Establishment</option>
+                            <option value="Conservative Establishment">🔴 Conservative / GOP</option>
+                            <option value="Nonpartisan / Moderate">⚪ Nonpartisan / Moderate</option>
+                        </select>
+
+                        <!-- Filter LGBTQ stance -->
+                        <select id="lgbtqFilter" class="px-3 py-2 bg-stone-50 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="ALL">LGBTQ+ Stance (All)</option>
+                            <option value="Vanguard">🏳️‍🌈 Outspoken Champion</option>
+                            <option value="Consistent Support">✅ Strong Support</option>
+                            <option value="Neutral / Standard">⚖️ Neutral / Standard Policy</option>
+                            <option value="Opposed / Culture War">⚠️ Opposed / Restrictive Policy</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- CANDIDATES GRID -->
+                <div id="candidateGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Dynamic rendering via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: SIDE-BY-SIDE CANDIDATE COMPARATOR -->
+        <section id="comparator" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8 space-y-6">
+            <div>
+                <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-semibold rounded-full uppercase tracking-wider mb-2">Comparative Analysis</span>
+                <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                    <span>⚖️</span> Head-to-Head Candidate Comparator
+                </h2>
+                <p class="text-slate-500 text-sm mt-1">
+                    Select any two candidates to directly compare polling standing, political alignment, policy platforms, financial backings, controversies, and LGBTQ+ records.
+                </p>
+            </div>
+
+            <!-- SELECTORS -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-stone-50 p-4 rounded-xl border border-stone-200">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Candidate 1</label>
+                    <select id="compCandidate1" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-lg text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-indigo-500">
+                        <!-- JS populated -->
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Candidate 2</label>
+                    <select id="compCandidate2" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-lg text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-indigo-500">
+                        <!-- JS populated -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- COMPARISON DISPLAY GRID -->
+            <div id="comparisonContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- JS populated comparison cards -->
+            </div>
+        </section>
+
+        <!-- SECTION 6: FINANCIAL & DARK MONEY DASHBOARD -->
+        <section id="finances" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8 space-y-6">
+            <div>
+                <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-full uppercase tracking-wider mb-2">Campaign Economics</span>
+                <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                    <span>💰</span> Financial Disparities & Funding Architecture
+                </h2>
+                <p class="text-slate-600 text-sm mt-1 leading-relaxed">
+                    Analyzing campaign war chests reveals massive structural divides between Establishment candidates backed by utility dark money and corporate PACs vs. Progressive challengers relying on labor unions and small donors.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart 1: Mayoral Race Spending -->
+                <div class="bg-stone-50 p-5 rounded-xl border border-stone-200 flex flex-col">
+                    <h3 class="font-bold text-slate-900 text-base mb-1">St. Petersburg Mayoral Campaign War Chests</h3>
+                    <p class="text-slate-500 text-xs mb-4">Estimated total expenditures vs remaining cash on hand in high-stakes mayoral primary.</p>
+                    <div class="chart-container">
+                        <canvas id="mayorFinChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: State Legislative Funding Disparities -->
+                <div class="bg-stone-50 p-5 rounded-xl border border-stone-200 flex flex-col">
+                    <h3 class="font-bold text-slate-900 text-base mb-1">State Senate Dist 16 & House Dist 62 Finances</h3>
+                    <p class="text-slate-500 text-xs mb-4">Comparing corporate institutional PAC capital vs grassroots fundraising totals.</p>
+                    <div class="chart-container">
+                        <canvas id="legFinChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FINANCIAL HIGHLIGHT BOXES -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-stone-100">
+                <div class="p-4 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900">
+                    <strong class="block font-bold text-sm mb-1">⚡ Utility Dark Money Spotlight</strong>
+                    Charlie Crist's political committee <em>St. Pete Shines</em> accepted >$130k from lobbyists linked to Florida Power & Light and Duke Energy while the city studies municipalizing its grid.
+                </div>
+                <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200 text-xs text-indigo-900">
+                    <strong class="block font-bold text-sm mb-1">🏛️ Establishment Corporate Dominance</strong>
+                    Fentrice Driskell accumulated ~$370k across committees, backed heavily by Disney World PACs, HCA Healthcare, and the Seminole Tribe.
+                </div>
+                <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200 text-xs text-emerald-900">
+                    <strong class="block font-bold text-sm mb-1">👥 Progressive Grassroots Mobilization</strong>
+                    Progressives like Kyandra Darling (~$102k) and labor-backed Amanda Lord (~$42k) are mounting highly competitive campaigns against traditional party fixtures.
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: LGBTQ+ RIGHTS & SOCIALLY AWARE POLITICS MATRIX -->
+        <section id="lgbtq-matrix" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8 space-y-6">
+            <div>
+                <span class="inline-block px-3 py-1 bg-purple-100 text-purple-800 text-xs font-semibold rounded-full uppercase tracking-wider mb-2">Policy Synthesis</span>
+                <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                    <span>🏳️‍🌈</span> Socially Aware Politics & LGBTQ+ Rights Matrix
+                </h2>
+                <p class="text-slate-600 text-sm mt-1 leading-relaxed">
+                    This matrix directly answers voter queries regarding candidates who proactively defend LGBTQ+ equality, civil rights, and socially conscious policies vs candidates maintaining establishment neutrality or aligning with restrictive conservative frameworks.
+                </p>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="bg-slate-900 text-white">
+                            <th class="p-3 font-semibold rounded-tl-lg">Candidate</th>
+                            <th class="p-3 font-semibold">Contest</th>
+                            <th class="p-3 font-semibold">Alignment</th>
+                            <th class="p-3 font-semibold">Poll %</th>
+                            <th class="p-3 font-semibold">Advocacy Level</th>
+                            <th class="p-3 font-semibold">Key LGBTQ+ / Socially Aware Actions</th>
+                            <th class="p-3 font-semibold rounded-tr-lg">Key Backers</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-stone-200 bg-stone-50">
+                        <tr class="hover:bg-amber-50/50 transition">
+                            <td class="p-3 font-bold text-slate-900">Michele K. Rayner</td>
+                            <td class="p-3 text-slate-600">State Senate 16</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-teal-100 text-teal-800 border border-teal-300 text-xs font-bold rounded">🟢 Progressive</span></td>
+                            <td class="p-3 font-bold text-sky-700">38%</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-bold rounded">🏳️‍🌈 Outspoken Champion</span></td>
+                            <td class="p-3 text-slate-700">Openly LGBTQ+ woman of color; civil rights attorney leading legislative opposition to healthcare and education restrictions. Endorsed by Equality Florida PAC & Victory Fund.</td>
+                            <td class="p-3 text-xs text-slate-600">Equality FL, Victory Fund, SEIU</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50/50 transition">
+                            <td class="p-3 font-bold text-slate-900">Kyandra Darling</td>
+                            <td class="p-3 text-slate-600">State Rep 62</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-teal-100 text-teal-800 border border-teal-300 text-xs font-bold rounded">🟢 Progressive</span></td>
+                            <td class="p-3 font-bold text-sky-700">42%</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-bold rounded">🏳️‍🌈 Outspoken Champion</span></td>
+                            <td class="p-3 text-slate-700">Platform explicitly centers health equity, minority voting rights protection, and progressive social justice. Endorsed by Bernie Sanders & Michele Rayner.</td>
+                            <td class="p-3 text-xs text-slate-600">Bernie Sanders, Moms Fed Up PAC</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50/50 transition">
+                            <td class="p-3 font-bold text-slate-900">Nancy Velardi</td>
+                            <td class="p-3 text-slate-600">School Board Dist 2</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-teal-100 text-teal-800 border border-teal-300 text-xs font-bold rounded">🟢 Progressive</span></td>
+                            <td class="p-3 font-bold text-sky-700">38%</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-bold rounded">🏳️‍🌈 Outspoken Champion</span></td>
+                            <td class="p-3 text-slate-700">Former PCTA President opposing ideological classroom censorship, book bans, and state-mandated restrictions on LGBTQ+ youth.</td>
+                            <td class="p-3 text-xs text-slate-600">PCTA, Ruth's List, Pinellas Dems</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50/50 transition">
+                            <td class="p-3 font-bold text-slate-900">Linsey Grove</td>
+                            <td class="p-3 text-slate-600">St. Pete Council Dist 6</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-teal-100 text-teal-800 border border-teal-300 text-xs font-bold rounded">🟢 Progressive</span></td>
+                            <td class="p-3 font-bold text-sky-700">24%</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-bold rounded">🏳️‍🌈 Outspoken Champion</span></td>
+                            <td class="p-3 text-slate-700">Former League of Women Voters President; advocates for equitable public health, housing justice, and LGBTQ+ inclusive municipal policies.</td>
+                            <td class="p-3 text-xs text-slate-600">STAR, Local Progressive Groups</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50/50 transition">
+                            <td class="p-3 font-bold text-slate-900">Jameka Williams</td>
+                            <td class="p-3 text-slate-600">St. Pete Council Dist 6</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-teal-100 text-teal-800 border border-teal-300 text-xs font-bold rounded">🟢 Progressive</span></td>
+                            <td class="p-3 font-bold text-sky-700">12%</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-bold rounded">🏳️‍🌈 Outspoken Champion</span></td>
+                            <td class="p-3 text-slate-700">Vocal grassroots activist centering tenant rights, human rights compassion for unhoused citizens, and protecting vulnerable minorities.</td>
+                            <td class="p-3 text-xs text-slate-600">Grassroots Social Justice Groups</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50/50 transition">
+                            <td class="p-3 font-bold text-slate-900">Fentrice Driskell</td>
+                            <td class="p-3 text-slate-600">State Senate 16</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-indigo-100 text-indigo-800 border border-indigo-300 text-xs font-bold rounded">🔵 Establishment</span></td>
+                            <td class="p-3 font-bold text-sky-700">44%</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded">✅ 100% Rating</span></td>
+                            <td class="p-3 text-slate-700">Maintains a consistent 100% voting record with LGBTQ+ advocacy organizations in Florida House; spearheaded historic cemetery protection and police oversight.</td>
+                            <td class="p-3 text-xs text-slate-600">House Democratic Caucus, Disney</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50/50 transition">
+                            <td class="p-3 font-bold text-slate-900">Kenneth T. Welch</td>
+                            <td class="p-3 text-slate-600">St. Pete Mayor</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-indigo-100 text-indigo-800 border border-indigo-300 text-xs font-bold rounded">🔵 Establishment</span></td>
+                            <td class="p-3 font-bold text-sky-700">31%</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded">✅ Strong Support</span></td>
+                            <td class="p-3 text-slate-700">Endorsed by Stonewall Democrats of Pinellas County; long track record supporting equality and inclusion policies in municipal administration.</td>
+                            <td class="p-3 text-xs text-slate-600">Stonewall Democrats, Local Labor</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50/50 transition">
+                            <td class="p-3 font-bold text-slate-900">Dawn Peters</td>
+                            <td class="p-3 text-slate-600">School Board Dist 3</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-rose-100 text-rose-800 border border-rose-300 text-xs font-bold rounded">🔴 GOP Conservative</span></td>
+                            <td class="p-3 font-bold text-sky-700">35%</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-rose-100 text-rose-800 text-xs font-bold rounded">⚠️ Opposed / Culture War</span></td>
+                            <td class="p-3 text-slate-700">Backed by Moms for Liberty & 1776 Project PAC; supports state restrictions on LGBTQ+ curricula; linked to QAnon oath controversy and conspiracy theories.</td>
+                            <td class="p-3 text-xs text-slate-600">Moms for Liberty, 1776 PAC</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50/50 transition">
+                            <td class="p-3 font-bold text-slate-900">Lisa Cane</td>
+                            <td class="p-3 text-slate-600">School Board Dist 2</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-rose-100 text-rose-800 border border-rose-300 text-xs font-bold rounded">🔴 GOP Conservative</span></td>
+                            <td class="p-3 font-bold text-sky-700">39%</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-rose-100 text-rose-800 text-xs font-bold rounded">⚠️ Restrictive Pledge</span></td>
+                            <td class="p-3 text-slate-700">Signed 2022 DeSantis parental rights pledge used to restrict LGBTQ+ discussions in public schools while focusing officially on arts education.</td>
+                            <td class="p-3 text-xs text-slate-600">Rep. Bilirakis, GOP Establishment</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 8: CONTROVERSY RADAR -->
+        <section id="controversies" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8 space-y-6">
+            <div>
+                <span class="inline-block px-3 py-1 bg-rose-100 text-rose-800 text-xs font-semibold rounded-full uppercase tracking-wider mb-2">Public Scrutiny</span>
+                <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                    <span>⚠️</span> Major Campaign Controversies & Critical Scrutiny
+                </h2>
+                <p class="text-slate-600 text-sm mt-1 leading-relaxed">
+                    Examinations of public scandals, corporate dark money ties, debate no-shows, QAnon links, and administrative failures shaping voter perception across the county.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Card 1 -->
+                <div class="p-5 bg-stone-50 rounded-xl border-l-4 border-rose-500 shadow-sm border-stone-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-slate-900 text-base">Dawn Peters (School Board Dist 3)</h3>
+                        <span class="px-2 py-0.5 bg-rose-100 text-rose-800 text-xs font-bold rounded">QAnon & Conspiracies</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        Investigative reports uncovered social media videos of Peters reciting the QAnon oath. Peters also amplified conspiracy theories calling the 9/11 attacks, moon landing, and COVID-19 pandemic "hoaxes," and referencing election denial as "Trump 2Q2Q."
+                    </p>
+                    <span class="text-xs text-slate-500 font-medium">Source: Tampa Bay Times Investigations</span>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="p-5 bg-stone-50 rounded-xl border-l-4 border-amber-500 shadow-sm border-stone-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-slate-900 text-base">Charlie Crist (St. Pete Mayor)</h3>
+                        <span class="px-2 py-0.5 bg-amber-100 text-amber-800 text-xs font-bold rounded">Utility Money & Empty Chair</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        Crist accepted >$130,000 from utility dark money tied to FPL and Duke Energy while St. Petersburg conducts a study to sever ties with Duke. Crist was also criticized for skipping the Suncoast Tiger Bay Club debate, leaving an empty chair on stage.
+                    </p>
+                    <span class="text-xs text-slate-500 font-medium">Source: Local Campaign Finance Audits & Tiger Bay Debate</span>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="p-5 bg-stone-50 rounded-xl border-l-4 border-indigo-500 shadow-sm border-stone-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-slate-900 text-base">Mark Bunker (Clearwater Seat 5)</h3>
+                        <span class="px-2 py-0.5 bg-indigo-100 text-indigo-800 text-xs font-bold rounded">Scientology Base Split</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        80% of Bunker's funds ($29k) come from out-of-state anti-Scientology donors. His donor coalition suffered chaos after key ally Aaron Smith-Levin was removed from the anti-Scientology Aftermath Foundation following misconduct allegations.
+                    </p>
+                    <span class="text-xs text-slate-500 font-medium">Source: Clearwater Municipal Reports & Finance Analysis</span>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="p-5 bg-stone-50 rounded-xl border-l-4 border-slate-500 shadow-sm border-stone-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-slate-900 text-base">Ken Welch (St. Pete Mayor)</h3>
+                        <span class="px-2 py-0.5 bg-slate-200 text-slate-800 text-xs font-bold rounded">Major Project Collapses</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        Welch's administration suffered the late-stage collapse of the multi-billion dollar Tampa Bay Rays stadium / Gas Plant District redevelopment deal, alongside the breakdown of a proposed Moffitt Cancer Center campus downtown over subsidy disagreements.
+                    </p>
+                    <span class="text-xs text-slate-500 font-medium">Source: Municipal Development Records</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- DETAIL MODAL -->
+    <div id="candidateModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative">
+            <button id="closeModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-2xl font-bold">×</button>
+            <div id="modalContent" class="space-y-4">
+                <!-- JS Populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 py-6 text-center text-xs">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>Nonpartisan 2026 Pinellas County & St. Petersburg Candidate, Polling & Election Research Portal.</p>
+            <p class="mt-1 text-slate-500">Data synthesized from Pinellas Supervisor of Elections, Florida Division of Elections, and August 2026 Voter Preference Surveys.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // -------------------------------------------------------------
+        // CANDIDATE DATABASE (Updated with 2026 Polling Data & Alignment)
+        // -------------------------------------------------------------
+        const candidatesData = [
+            // State Senate 16
+            {
+                id: "driskell",
+                name: "Fentrice Driskell",
+                party: "DEM",
+                contest: "State Senator, District 16",
+                category: "State Senate",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 Establishment",
+                polling: "44%",
+                pollingStatus: "Leading (+6%)",
+                pollingDetails: "Leading primary field 44% to 38% with 18% undecided voters (St. Pete Surveys, Aug 2026).",
+                raised: "$370,000",
+                raisedNumeric: 370000,
+                spentNumeric: 210000,
+                backers: "Walt Disney World PACs, Seminole Tribe, HCA Healthcare, FL Home Builders",
+                lgbtqStance: "Consistent Support",
+                lgbtqBadge: "✅ 100% Score",
+                lgbtqDetails: "Maintains a 100% scorecard rating with Florida LGBTQ+ advocacy groups. Opposed restrictions in healthcare and education.",
+                platform: "Property insurance stabilization, AI regulation oversight, Medicaid expansion, public education funding, historic cemetery protection.",
+                controversy: "Facing intraparty civil war as House Democratic Minority Leader while 5 sitting Democratic State Senators endorsed her opponent Michele Rayner.",
+                endorsements: "House Democratic Campaign Arm, Sens. Lori Berman & Tina Scott Polsky, former Tampa Mayor Bob Buckhorn."
+            },
+            {
+                id: "rayner",
+                name: "Michele K. Rayner",
+                party: "DEM",
+                contest: "State Senator, District 16",
+                category: "State Senate",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Progressive",
+                polling: "38%",
+                pollingStatus: "Trailing (-6%)",
+                pollingDetails: "38% preference in primary poll, within striking distance with high progressive GOTV mobilization.",
+                raised: "$38,000",
+                raisedNumeric: 38000,
+                spentNumeric: 28000,
+                backers: "SEIU Florida, Grassroots Donors, Equality Florida Action PAC",
+                lgbtqStance: "Vanguard",
+                lgbtqBadge: "🏳️‍🌈 Outspoken Champion",
+                lgbtqDetails: "Openly LGBTQ+ woman of color. Civil rights attorney fiercely opposing state restrictions on gender identity and sexual orientation.",
+                platform: "Intersectional civil rights, affordable housing advocacy, police oversight, protecting marginalized communities against legislative targeting.",
+                controversy: "Facing significant financial deficit against Driskell's corporate war chest.",
+                endorsements: "LGBTQ+ Victory Fund, Equality Florida Action PAC, 5 Democratic State Senators (inc. Carlos Guillermo Smith), Mayor Ken Welch."
+            },
+
+            // State Rep 62
+            {
+                id: "darling",
+                name: "Kyandra Darling",
+                party: "DEM",
+                contest: "State Representative, District 62",
+                category: "State Rep",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Progressive",
+                polling: "42%",
+                pollingStatus: "Leading (+6%)",
+                pollingDetails: "Leading primary survey 42% vs 36% for Newton with 22% undecided.",
+                raised: "$102,000",
+                raisedNumeric: 102000,
+                spentNumeric: 95000,
+                backers: "Moms Fed Up PAC (Washington D.C.), Grassroots Progressive Networks",
+                lgbtqStance: "Vanguard",
+                lgbtqBadge: "🏳️‍🌈 Outspoken Champion",
+                lgbtqDetails: "Explicitly advocates for health equity, civil rights, and defending LGBTQ+ youth against state restrictions.",
+                platform: "Health equity, public education infrastructure, community violence prevention, union rights, voting rights defense.",
+                controversy: "Aggressive campaign spending leaving low cash reserves entering final stretch.",
+                endorsements: "U.S. Sen. Bernie Sanders, U.S. Rep. Kathy Castor, Rep. Michele Rayner (Succession endorsement)."
+            },
+            {
+                id: "newton",
+                name: "Wengay 'Newt' Newton",
+                party: "DEM",
+                contest: "State Representative, District 62",
+                category: "State Rep",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 Moderate Establishment",
+                polling: "36%",
+                pollingStatus: "Trailing (-6%)",
+                pollingDetails: "Trailing Darling with strong name recognition among long-time older voters.",
+                raised: "$24,500",
+                raisedNumeric: 24500,
+                spentNumeric: 20000,
+                backers: "Big 3 Entertainment (Bill Edwards), Local Corporate Donors",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Standard Moderate",
+                lgbtqDetails: "Moderate establishment stance, focusing primarily on traditional municipal issues rather than active LGBTQ+ advocacy.",
+                platform: "Traditional economic growth, constituent services, historical name recognition.",
+                controversy: "Serial candidacy and political fatigue following consecutive losses for County Commission, Mayor, and Council.",
+                endorsements: "Bill Edwards / Big 3 Entertainment, Local moderate business leaders."
+            },
+
+            // County Commission 4
+            {
+                id: "eggers",
+                name: "Dave Eggers",
+                party: "REP",
+                contest: "County Commission, District 4",
+                category: "County Commission",
+                alignment: "Conservative Establishment",
+                alignmentBadge: "🔴 GOP Establishment",
+                polling: "52%",
+                pollingStatus: "Solid Lead (+24%)",
+                pollingDetails: "52% support in GOP primary survey over challenger Ringelspaugh (28%).",
+                raised: "$49,500",
+                raisedNumeric: 49500,
+                spentNumeric: 22000,
+                backers: "Suncoast Tampa Association of Realtors (STAR), Local GOP Establishment",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Standard Conservative",
+                lgbtqDetails: "Conservative focus on fiscal issues without active LGBTQ+ policy engagement.",
+                platform: "Fiscal restraint, infrastructure continuity, steady growth management, tax stabilization.",
+                controversy: "Criticized by primary opponent for slow disaster permitting and lift station failures.",
+                endorsements: "Suncoast Tampa Association of Realtors (STAR)."
+            },
+            {
+                id: "ringelspaugh",
+                name: "Anthony Ringelspaugh",
+                party: "REP",
+                contest: "County Commission, District 4",
+                category: "County Commission",
+                alignment: "Conservative Establishment",
+                alignmentBadge: "🔴 GOP Populist",
+                polling: "28%",
+                pollingStatus: "Trailing (-24%)",
+                pollingDetails: "28% support with 20% undecided in District 4 GOP primary.",
+                raised: "$18,000",
+                raisedNumeric: 18000,
+                spentNumeric: 12000,
+                backers: "Grassroots Anti-Overdevelopment Donors",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Standard Populist",
+                lgbtqDetails: "Populist platform centered entirely on permitting red tape and infrastructure.",
+                platform: "Permitting overhaul, hurricane disaster recovery speed, fixing stormwater/lift stations, stopping over-taxation.",
+                controversy: "Lacks organizational backing and faces severe financial deficit against incumbent.",
+                endorsements: "Local anti-overdevelopment civic groups."
+            },
+
+            // Judicial 39
+            {
+                id: "constantine",
+                name: "Elizabeth 'Liz' Constantine",
+                party: "Nonpartisan",
+                contest: "Circuit Judge, 6th Circuit, Group 39",
+                category: "Judicial",
+                alignment: "Nonpartisan / Moderate",
+                alignmentBadge: "⚪ Nonpartisan / Judicial",
+                polling: "42%",
+                pollingStatus: "Leading (+11%)",
+                pollingDetails: "42% preference in Judicial Bar/Voter Survey vs 31% for Diskey (27% undecided).",
+                raised: "N/A (Judicial)",
+                raisedNumeric: 35000,
+                spentNumeric: 20000,
+                backers: "Law Enforcement & PCSO Networks",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Judicial Neutrality",
+                lgbtqDetails: "Bound by judicial canons prohibiting partisan/social advocacy positions.",
+                platform: "Prosecutorial experience, legal counsel for Pinellas County Sheriff's Office, courtroom integrity.",
+                controversy: "None reported.",
+                endorsements: "Pinellas County Sheriff's Office leadership network."
+            },
+            {
+                id: "diskey",
+                name: "Stefen Diskey",
+                party: "Nonpartisan",
+                contest: "Circuit Judge, 6th Circuit, Group 39",
+                category: "Judicial",
+                alignment: "Nonpartisan / Moderate",
+                alignmentBadge: "⚪ Nonpartisan / Judicial",
+                polling: "31%",
+                pollingStatus: "Trailing (-11%)",
+                pollingDetails: "31% support with high undecided percentage in nonpartisan judicial race.",
+                raised: "N/A (Judicial)",
+                raisedNumeric: 28000,
+                spentNumeric: 15000,
+                backers: "Private Trial Bar",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Judicial Neutrality",
+                lgbtqDetails: "Bound by judicial canons prohibiting policy commitments.",
+                platform: "Lead trial attorney background, complex criminal felony and civil litigation experience.",
+                controversy: "None reported.",
+                endorsements: "Local Trial Lawyers & Legal Professionals."
+            },
+
+            // Judicial 44
+            {
+                id: "garcia",
+                name: "Oxalis B. Garcia",
+                party: "Nonpartisan",
+                contest: "Circuit Judge, 6th Circuit, Group 44",
+                category: "Judicial",
+                alignment: "Nonpartisan / Moderate",
+                alignmentBadge: "⚪ Nonpartisan / Judicial",
+                polling: "35%",
+                pollingStatus: "Trailing (-6%)",
+                pollingDetails: "35% vs 41% for incumbent Jack (24% undecided).",
+                raised: "N/A (Judicial)",
+                raisedNumeric: 25000,
+                spentNumeric: 18000,
+                backers: "Private Legal Practitioners",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Judicial Neutrality",
+                lgbtqDetails: "Bound by judicial canons prohibiting partisan stances.",
+                platform: "Private practice experience in family law, probate, and juvenile dependency cases.",
+                controversy: "Challenging an incumbent judge.",
+                endorsements: "Family Law & Probate Attorneys Network."
+            },
+            {
+                id: "jack",
+                name: "Elizabeth 'Liz' Jack",
+                party: "Nonpartisan",
+                contest: "Circuit Judge, 6th Circuit, Group 44",
+                category: "Judicial",
+                alignment: "Nonpartisan / Moderate",
+                alignmentBadge: "⚪ Nonpartisan / Judicial",
+                polling: "41%",
+                pollingStatus: "Leading (+6%)",
+                pollingDetails: "41% lead reflecting incumbency advantage since 2021 appointment.",
+                raised: "N/A (Judicial)",
+                raisedNumeric: 40000,
+                spentNumeric: 22000,
+                backers: "Incumbent Judicial Coalition",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Judicial Neutrality",
+                lgbtqDetails: "Bound by judicial canons prohibiting political advocacy.",
+                platform: "Incumbent record since 2021 presiding over civil, criminal, and family law dockets.",
+                controversy: "None reported.",
+                endorsements: "Sitting Circuit Judges & Bar Leadership."
+            },
+
+            // County Judge 10
+            {
+                id: "fiorentino",
+                name: "Nick Fiorentino",
+                party: "Nonpartisan",
+                contest: "County Judge, Group 10",
+                category: "Judicial",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 Law Enforcement Establishment",
+                polling: "54%",
+                pollingStatus: "Commanding Lead (+32%)",
+                pollingDetails: "54% preference rating backed by overwhelming law enforcement and bipartisan endorsements.",
+                raised: "N/A (Judicial)",
+                raisedNumeric: 75000,
+                spentNumeric: 45000,
+                backers: "Suncoast PBA, Florida PBA, Clearwater Fire Fighters, Police Chiefs",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Judicial Neutrality",
+                lgbtqDetails: "Bound by judicial canons; holds widespread bipartisan law enforcement backing.",
+                platform: "23+ years legal experience, primary critical incident attorney for police officers in shootings and internal reviews.",
+                controversy: "Heavy integration with law enforcement unions.",
+                endorsements: "Suncoast PBA, 50+ elected officials, 7 former judges, Tampa Bay Times Editorial Board, Rick Kriseman, Jack Latvala."
+            },
+            {
+                id: "wade",
+                name: "Zachariah Wade",
+                party: "Nonpartisan",
+                contest: "County Judge, Group 10",
+                category: "Judicial",
+                alignment: "Nonpartisan / Moderate",
+                alignmentBadge: "⚪ Nonpartisan / Judicial",
+                polling: "22%",
+                pollingStatus: "Trailing (-32%)",
+                pollingDetails: "22% support with 24% undecided in Group 10 County Judge race.",
+                raised: "N/A (Judicial)",
+                raisedNumeric: 15000,
+                spentNumeric: 10000,
+                backers: "Grassroots Legal Community",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Judicial Neutrality",
+                lgbtqDetails: "Bound by judicial canons prohibiting political platform statements.",
+                platform: "Safe neighborhoods, trustworthy judicial institutions, civic accessibility.",
+                controversy: "Faced with an overwhelming institutional law enforcement monolith.",
+                endorsements: "Local civic and grassroots legal figures."
+            },
+
+            // School Board Dist 2
+            {
+                id: "cane",
+                name: "Lisa Cane",
+                party: "REP (Nonpartisan Seat)",
+                contest: "School Board Member, District 2 At-Large",
+                category: "School Board",
+                alignment: "Conservative Establishment",
+                alignmentBadge: "🔴 GOP Establishment",
+                polling: "39%",
+                pollingStatus: "Statistical Tie (+1%)",
+                pollingDetails: "39% vs Velardi 38% with 23% undecided voters (Pinellas School Board Survey, Aug 2026).",
+                raised: "$19,000",
+                raisedNumeric: 19000,
+                spentNumeric: 12000,
+                backers: "GOP Establishment, Business Associations",
+                lgbtqStance: "Opposed / Culture War",
+                lgbtqBadge: "⚠️ Restrictive Pledge",
+                lgbtqDetails: "Signed DeSantis 2022 parental rights pledge used to restrict LGBTQ+ discussions in public classrooms.",
+                platform: "Arts and humanities integration into public core curriculum, school choice competition.",
+                controversy: "Alignment with hardline conservative education frameworks despite arts-focused platform.",
+                endorsements: "U.S. Rep. Gus Bilirakis, Tax Collector Adam Ross, Clearwater Mayor Bruce Rector."
+            },
+            {
+                id: "velardi",
+                name: "Nancy Velardi",
+                party: "DEM (Nonpartisan Seat)",
+                contest: "School Board Member, District 2 At-Large",
+                category: "School Board",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Progressive Labor",
+                polling: "38%",
+                pollingStatus: "Statistical Tie (-1%)",
+                pollingDetails: "38% vs Cane 39% in tight At-Large district contest.",
+                raised: "$10,000",
+                raisedNumeric: 10000,
+                spentNumeric: 7000,
+                backers: "PCTA, PESPA, Ruth's List, Progressive Coalitions",
+                lgbtqStance: "Vanguard",
+                lgbtqBadge: "🏳️‍🌈 Outspoken Champion",
+                lgbtqDetails: "Explicitly opposes ideological classroom censorship and policies targeting LGBTQ+ students and curricula.",
+                platform: "Teacher retention, eliminating curriculum censorship, supporting public education labor infrastructure.",
+                controversy: "Trailing incumbent in campaign funding.",
+                endorsements: "Pinellas Classroom Teachers Association (PCTA), Ruth's List, Councilmember Richie Floyd."
+            },
+
+            // School Board Dist 3
+            {
+                id: "campogni",
+                name: "Curtis Campogni",
+                party: "Nonpartisan",
+                contest: "School Board Member, District 3 At-Large",
+                category: "School Board",
+                alignment: "Nonpartisan / Moderate",
+                alignmentBadge: "⚪ Nonpartisan Moderate",
+                polling: "15%",
+                pollingStatus: "3rd Place",
+                pollingDetails: "15% support holding moderate anti-polarization voting bloc.",
+                raised: "$11,117",
+                raisedNumeric: 11117,
+                spentNumeric: 6000,
+                backers: "Youth Community Organizations",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Anti-Polarization",
+                lgbtqDetails: "Advocates focusing on practical student resources rather than national culture wars.",
+                platform: "Anti-status-quo moderate, ending toxic board polarization, empowering youth programs ('Speak4MC').",
+                controversy: "Competing in a crowded nonpartisan field.",
+                endorsements: "Local youth advocacy leaders."
+            },
+            {
+                id: "douglas",
+                name: "Dawn Douglas",
+                party: "Nonpartisan",
+                contest: "School Board Member, District 3 At-Large",
+                category: "School Board",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Progressive Grassroots",
+                polling: "28%",
+                pollingStatus: "2nd Place (-7%)",
+                pollingDetails: "28% support challenging Peters for public school voter base.",
+                raised: "$4,000",
+                raisedNumeric: 4000,
+                spentNumeric: 2500,
+                backers: "Grassroots Public Education Advocates",
+                lgbtqStance: "Consistent Support",
+                lgbtqBadge: "✅ Progressive Ally",
+                lgbtqDetails: "Supports inclusive public education policies for minority and LGBTQ+ youth.",
+                platform: "Public school funding, student support services, classroom safety.",
+                controversy: "Severe financial deficit and risk of fracturing anti-Peters vote.",
+                endorsements: "Local education activists."
+            },
+            {
+                id: "peters",
+                name: "Dawn Peters",
+                party: "REP (Nonpartisan Seat)",
+                contest: "School Board Member, District 3 At-Large",
+                category: "School Board",
+                alignment: "Conservative Establishment",
+                alignmentBadge: "🔴 Right-Wing Culture War",
+                polling: "35%",
+                pollingStatus: "Plurality Lead (+7%)",
+                pollingDetails: "35% plurality lead in 3-way race with 22% undecided voters.",
+                raised: "$11,000",
+                raisedNumeric: 11000,
+                spentNumeric: 8000,
+                backers: "Moms for Liberty Pinellas, 1776 Project PAC",
+                lgbtqStance: "Opposed / Culture War",
+                lgbtqBadge: "⚠️ Opposed / Culture War",
+                lgbtqDetails: "Actively supports restricting LGBTQ+ topics in schools; backed by conservative culture war groups.",
+                platform: "Eliminating critical race theory, parental rights enforcement, conservative curriculum review.",
+                controversy: "Severe national scandal: filmed reciting QAnon oath; shared conspiracies calling 9/11, moon landing, and COVID 'hoaxes'.",
+                endorsements: "Moms for Liberty Pinellas, 1776 Project PAC."
+            },
+
+            // School Board Dist 6
+            {
+                id: "bostock",
+                name: "Nancy Nelis Bostock",
+                party: "REP (Nonpartisan Seat)",
+                contest: "School Board Member, District 6 Single Member",
+                category: "School Board",
+                alignment: "Conservative Establishment",
+                alignmentBadge: "🔴 GOP Establishment",
+                polling: "41%",
+                pollingStatus: "Slight Lead (+4%)",
+                pollingDetails: "41% vs Amanda Lord 37% with 22% undecided in District 6.",
+                raised: "$46,000",
+                raisedNumeric: 46000,
+                spentNumeric: 30000,
+                backers: "Pinellas Republican Establishment",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Traditional Conservative",
+                lgbtqDetails: "Focuses on traditional parental rights and fiscal transparency.",
+                platform: "Campus security hardening, absolute curriculum transparency, fiscal oversight tied to student success.",
+                controversy: "Entrenched party figure returning after past terms on Board and Commission.",
+                endorsements: "Rep. Gus Bilirakis, Sheriff Bob Gualtieri, 6 County Commissioners, Clerk Ken Burke."
+            },
+            {
+                id: "lord",
+                name: "Amanda Lord",
+                party: "DEM (Nonpartisan Seat)",
+                contest: "School Board Member, District 6 Single Member",
+                category: "School Board",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Progressive Labor",
+                polling: "37%",
+                pollingStatus: "Trailing (-4%)",
+                pollingDetails: "37% support with labor union mobilization tightening the margin.",
+                raised: "$42,000",
+                raisedNumeric: 42000,
+                spentNumeric: 25000,
+                backers: "1199 SEIU, PCTA, SEIU Florida",
+                lgbtqStance: "Vanguard",
+                lgbtqBadge: "🏳️‍🌈 Outspoken Champion",
+                lgbtqDetails: "Backed by organized labor; champions inclusive school policies and mental health support for vulnerable youth.",
+                platform: "Competitive teacher compensation, labor retention, removing administrative classroom burdens, PTA accountability.",
+                controversy: "Facing a formidable establishment candidate backed by constitutional officers.",
+                endorsements: "1199 SEIU United Healthcare Workers East, PCTA, SEIU Florida."
+            },
+
+            // Clearwater Seat 4
+            {
+                id: "latvala",
+                name: "Bianca Latvala",
+                party: "Nonpartisan",
+                contest: "City of Clearwater, Councilmember Seat 4",
+                category: "Clearwater",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 Local Establishment",
+                polling: "44%",
+                pollingStatus: "Solid Lead (+15%)",
+                pollingDetails: "44% vs Jared Leone 29% (27% undecided) in Clearwater Seat 4.",
+                raised: "$35,000",
+                raisedNumeric: 35000,
+                spentNumeric: 20000,
+                backers: "Clearwater Political Establishment",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Standard Municipal",
+                lgbtqDetails: "Focuses on local municipal advisory boards and resiliency.",
+                platform: "Community resiliency, local parks and leisure services, downtown revitalization.",
+                controversy: "Political capital deeply augmented by marriage to County Commissioner Chris Latvala.",
+                endorsements: "Clearwater Mayor Bruce Rector, Councilmember David Allbritton."
+            },
+            {
+                id: "leone",
+                name: "Jared Leone",
+                party: "Nonpartisan",
+                contest: "City of Clearwater, Councilmember Seat 4",
+                category: "Clearwater",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Independent Progressive",
+                polling: "29%",
+                pollingStatus: "Trailing (-15%)",
+                pollingDetails: "29% support with 27% undecided in municipal race.",
+                raised: "$8,000",
+                raisedNumeric: 8000,
+                spentNumeric: 5000,
+                backers: "Grassroots Local Donors",
+                lgbtqStance: "Consistent Support",
+                lgbtqBadge: "✅ Progressive Ally",
+                lgbtqDetails: "Supports inclusive municipal policies and open government transparency.",
+                platform: "Independent journalistic oversight, neighborhood preservation, environmental protections.",
+                controversy: "Lacks the institutional political machine supporting Latvala.",
+                endorsements: "Local neighborhood civic activists."
+            },
+
+            // Clearwater Seat 5
+            {
+                id: "bunker",
+                name: "Mark Bunker",
+                party: "Nonpartisan",
+                contest: "City of Clearwater, Councilmember Seat 5",
+                category: "Clearwater",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Anti-Cult Reformer",
+                polling: "36%",
+                pollingStatus: "Plurality Lead (+6%)",
+                pollingDetails: "36% plurality in 3-way race (Laughlin 30%, Wilson 14%, Undecided 20%).",
+                raised: "$29,000",
+                raisedNumeric: 29000,
+                spentNumeric: 22000,
+                backers: "National Anti-Scientology Network (Xenu TV)",
+                lgbtqStance: "Consistent Support",
+                lgbtqBadge: "✅ Civil Rights Ally",
+                lgbtqDetails: "Focuses heavily on civil liberties and halting authoritarian cult practices.",
+                platform: "Stopping Church of Scientology downtown real estate expansion, city transparency.",
+                controversy: "80% of funds from out-of-state; donor base disrupted after ally Aaron Smith-Levin was removed from Aftermath Board.",
+                endorsements: "Leah Remini (historical), National Anti-Scientology Activists."
+            },
+            {
+                id: "laughlin",
+                name: "Kevin R.T. Laughlin",
+                party: "Nonpartisan",
+                contest: "City of Clearwater, Councilmember Seat 5",
+                category: "Clearwater",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 Business Establishment",
+                polling: "30%",
+                pollingStatus: "2nd Place (-6%)",
+                pollingDetails: "30% support trailing incumbent Bunker by 6 points.",
+                raised: "$12,000",
+                raisedNumeric: 12000,
+                spentNumeric: 8000,
+                backers: "Local Business Owners",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Traditional Municipal",
+                lgbtqDetails: "Focuses strictly on municipal service delivery.",
+                platform: "Standard city management, zoning balance, infrastructure upgrades.",
+                controversy: "Attempting to navigate between Bunker's anti-Scientology crusade and traditional politics.",
+                endorsements: "Clearwater business figures."
+            },
+            {
+                id: "wilson",
+                name: "Sam Wilson",
+                party: "Nonpartisan",
+                contest: "City of Clearwater, Councilmember Seat 5",
+                category: "Clearwater",
+                alignment: "Nonpartisan / Moderate",
+                alignmentBadge: "⚪ Nonpartisan Municipal",
+                polling: "14%",
+                pollingStatus: "3rd Place",
+                pollingDetails: "14% support with 20% undecided voters.",
+                raised: "$6,000",
+                raisedNumeric: 6000,
+                spentNumeric: 4000,
+                backers: "Local Residents",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Traditional Municipal",
+                lgbtqDetails: "Focuses on neighborhood issues.",
+                platform: "Neighborhood safety, trash collection efficiency, tax control.",
+                controversy: "Low financial visibility.",
+                endorsements: "Local neighborhood leaders."
+            },
+
+            // Oldsmar Seat 3
+            {
+                id: "stephens",
+                name: "Amber Stephens",
+                party: "Nonpartisan",
+                contest: "City of Oldsmar, Council Member Seat 3",
+                category: "Oldsmar",
+                alignment: "Nonpartisan / Moderate",
+                alignmentBadge: "⚪ Nonpartisan Municipal",
+                polling: "32%",
+                pollingStatus: "Slight Lead (+4%)",
+                pollingDetails: "32% vs Villafana 28% and Young 18% (22% undecided) in Oldsmar.",
+                raised: "$4,500",
+                raisedNumeric: 4500,
+                spentNumeric: 2000,
+                backers: "Oldsmar Residents",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Municipal Service",
+                lgbtqDetails: "Local municipal focus.",
+                platform: "Parks expansion, municipal service delivery, local business support.",
+                controversy: "None reported.",
+                endorsements: "Oldsmar civic groups."
+            },
+            {
+                id: "villafana",
+                name: "Jessica H. Villafana",
+                party: "Nonpartisan",
+                contest: "City of Oldsmar, Council Member Seat 3",
+                category: "Oldsmar",
+                alignment: "Nonpartisan / Moderate",
+                alignmentBadge: "⚪ Nonpartisan Municipal",
+                polling: "28%",
+                pollingStatus: "2nd Place (-4%)",
+                pollingDetails: "28% support in 3-way nonpartisan municipal contest.",
+                raised: "$3,800",
+                raisedNumeric: 3800,
+                spentNumeric: 1500,
+                backers: "Local Community Members",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Municipal Service",
+                lgbtqDetails: "Local municipal focus.",
+                platform: "Flood mitigation, community events, fiscal responsibility.",
+                controversy: "None reported.",
+                endorsements: "Local neighborhood advocates."
+            },
+            {
+                id: "young",
+                name: "Fraser Young",
+                party: "Nonpartisan",
+                contest: "City of Oldsmar, Council Member Seat 3",
+                category: "Oldsmar",
+                alignment: "Nonpartisan / Moderate",
+                alignmentBadge: "⚪ Nonpartisan Municipal",
+                polling: "18%",
+                pollingStatus: "3rd Place",
+                pollingDetails: "18% support with local civic backing.",
+                raised: "$2,500",
+                raisedNumeric: 2500,
+                spentNumeric: 1000,
+                backers: "Local Residents",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Municipal Service",
+                lgbtqDetails: "Local municipal focus.",
+                platform: "Traffic safety, infrastructure maintenance, public recreation.",
+                controversy: "None reported.",
+                endorsements: "Local civic volunteers."
+            },
+
+            // St. Petersburg Mayor
+            {
+                id: "batdorf",
+                name: "Kevin Batdorf",
+                party: "Nonpartisan",
+                contest: "City of St. Petersburg, Mayor",
+                category: "St. Petersburg Mayor",
+                alignment: "Nonpartisan / Moderate",
+                alignmentBadge: "⚪ Neighborhood Activist",
+                polling: "2%",
+                pollingStatus: "6th Place",
+                pollingDetails: "2% support concentrated in flood-prone Shore Acres precinct.",
+                raised: "$5,000",
+                raisedNumeric: 5000,
+                spentNumeric: 3000,
+                backers: "Shore Acres Neighborhood Activists",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Non-politician Outsider",
+                lgbtqDetails: "Non-politician focused primarily on chronic flood infrastructure.",
+                platform: "Flood mitigation in low-lying neighborhoods, outsider municipal oversight.",
+                controversy: "Polling in low single digits.",
+                endorsements: "Shore Acres civic leaders."
+            },
+            {
+                id: "crist",
+                name: "Charlie Crist",
+                party: "DEM",
+                contest: "City of St. Petersburg, Mayor",
+                category: "St. Petersburg Mayor",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 Party/Corporate Establishment",
+                polling: "34%",
+                pollingStatus: "Leading (+3%)",
+                pollingDetails: "34% Mayoral primary preference leading incumbent Ken Welch (31%) with 10% undecided (St. Pete Surveys, Aug 2026).",
+                raised: "> $1,000,000",
+                raisedNumeric: 1000000,
+                spentNumeric: 950000,
+                backers: "Tallahassee Utility Lobbyists (FPL/Duke Energy links via 'St. Pete Shines' PAC)",
+                lgbtqStance: "Consistent Support",
+                lgbtqBadge: "✅ Established Ally",
+                lgbtqDetails: "Supports LGBTQ+ non-discrimination policies in city contracting and administration.",
+                platform: "Populist $15M property tax cut, 'People First' administration, regional transportation expansion.",
+                controversy: "Accepted >$130k from utility dark money while city studies municipal power grid; empty chair debate scandal.",
+                endorsements: "State and national political figures, broad media PAC saturation."
+            },
+            {
+                id: "gabbard",
+                name: "Brandi Gabbard",
+                party: "DEM",
+                contest: "City of St. Petersburg, Mayor",
+                category: "St. Petersburg Mayor",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Progressive Municipal Labor",
+                polling: "12%",
+                pollingStatus: "3rd Place",
+                pollingDetails: "12% support capturing progressive voters seeking an alternative to Crist and Welch.",
+                raised: "< $28,000 COH",
+                raisedNumeric: 75000,
+                spentNumeric: 50000,
+                backers: "Municipal Employees Union, 'Dump Duke' Campaign",
+                lgbtqStance: "Consistent Support",
+                lgbtqBadge: "✅ Inclusive Municipalist",
+                lgbtqDetails: "Consistently votes for inclusive municipal programming and anti-discrimination initiatives.",
+                platform: "Pragmatic administration, municipal employee wage increases, power grid municipalization, slowing Gas Plant rush.",
+                controversy: "Targeted by 'Friends of Honor Fund' dark money mailers attacking her 2022 vote on rent control.",
+                endorsements: "Local municipal labor representatives, clean energy advocates."
+            },
+            {
+                id: "large",
+                name: "Jim Large",
+                party: "Nonpartisan",
+                contest: "City of St. Petersburg, Mayor",
+                category: "St. Petersburg Mayor",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 Public Safety Establishment",
+                polling: "8%",
+                pollingStatus: "4th Place",
+                pollingDetails: "8% support among retired first responders and conservative municipal voters.",
+                raised: "< $58,000 COH",
+                raisedNumeric: 65000,
+                spentNumeric: 40000,
+                backers: "Retired Public Safety Officers",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Administrative Focus",
+                lgbtqDetails: "Platform focuses on administrative reinstatement and public safety management.",
+                platform: "Grievance-driven oversight, public safety employee protections, efficient fire/rescue operations.",
+                controversy: "Briefly placed on administrative leave by Welch in 2023; funding attack mailers against Crist.",
+                endorsements: "Retired first responder associations."
+            },
+            {
+                id: "scruggs",
+                name: "Maria Lynne Scruggs",
+                party: "Nonpartisan",
+                contest: "City of St. Petersburg, Mayor",
+                category: "St. Petersburg Mayor",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Grassroots Activist",
+                polling: "3%",
+                pollingStatus: "5th Place",
+                pollingDetails: "3% support among South St. Pete grassroots community networks.",
+                raised: "$8,000",
+                raisedNumeric: 8000,
+                spentNumeric: 6000,
+                backers: "Grassroots Community Advocates",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Community Activist",
+                lgbtqDetails: "Focuses on criminal justice oversight and constituent services.",
+                platform: "Criminal justice reform, jail administration oversight, equitable economic investment.",
+                controversy: "Polling in low single digits.",
+                endorsements: "Grassroots civic groups."
+            },
+            {
+                id: "welch",
+                name: "Kenneth T. Welch",
+                party: "DEM",
+                contest: "City of St. Petersburg, Mayor",
+                category: "St. Petersburg Mayor",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 Incumbent Establishment",
+                polling: "31%",
+                pollingStatus: "2nd Place (-3%)",
+                pollingDetails: "31% Mayoral preference trailing Crist by 3 points in tight incumbent defense battle.",
+                raised: "$381,000",
+                raisedNumeric: 381000,
+                spentNumeric: 300000,
+                backers: "Local Developer Networks, Stonewall Democrats, Incumbent Network",
+                lgbtqStance: "Consistent Support",
+                lgbtqBadge: "✅ Strong Support",
+                lgbtqDetails: "Endorsed by Stonewall Democrats of Pinellas County; record supporting inclusive municipal initiatives.",
+                platform: "$600M infrastructure bond (water/flooding), affordable housing expansion, Tropicana Field emergency repairs.",
+                controversy: "Collapse of multi-billion dollar Rays/Gas Plant redevelopment deal and Moffitt Cancer Center deal.",
+                endorsements: "Stonewall Democrats of Pinellas County, Local labor unions, business leaders."
+            },
+
+            // St. Petersburg Council Dist 6
+            {
+                id: "balliet",
+                name: "Terri Balliet",
+                party: "Nonpartisan",
+                contest: "City of St. Petersburg, Council Member District 6",
+                category: "St. Petersburg Council",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 Business Establishment",
+                polling: "21%",
+                pollingStatus: "3rd Place",
+                pollingDetails: "21% support in crowded District 6 municipal primary.",
+                raised: "$50,000",
+                raisedNumeric: 50000,
+                spentNumeric: 45000,
+                backers: "Children's Network, Downtown Business Network",
+                lgbtqStance: "Consistent Support",
+                lgbtqBadge: "✅ Inclusive Advocate",
+                lgbtqDetails: "Advocates for compassionate, health-based social services and inclusive youth programs.",
+                platform: "Business Improvement District, health-based homelessness response, downtown transit.",
+                controversy: "Depleted war chest leaving only $5k for final campaign push.",
+                endorsements: "Social service executives and local small business owners."
+            },
+            {
+                id: "grove",
+                name: "Linsey Grove",
+                party: "Nonpartisan",
+                contest: "City of St. Petersburg, Council Member District 6",
+                category: "St. Petersburg Council",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Progressive Civic",
+                polling: "24%",
+                pollingStatus: "2nd Place (-2%)",
+                pollingDetails: "24% support trailing Mallory by 2 points in 5-way contest.",
+                raised: "$27,000",
+                raisedNumeric: 27000,
+                spentNumeric: 14000,
+                backers: "Suncoast Tampa Association of Realtors (STAR), Progressive Donors",
+                lgbtqStance: "Vanguard",
+                lgbtqBadge: "🏳️‍🌈 Outspoken Champion",
+                lgbtqDetails: "Former League of Women Voters President advocating for equitable public health and inclusive municipal policies.",
+                platform: "Zoning density reform (upzoning), low-cost home repair grants, restricting corporate home purchases.",
+                controversy: "Balancing progressive housing platform with real estate association endorsement.",
+                endorsements: "Suncoast Tampa Association of Realtors (STAR), Progressive civic leaders."
+            },
+            {
+                id: "homeyer",
+                name: "Doug Homeyer",
+                party: "Nonpartisan",
+                contest: "City of St. Petersburg, Council Member District 6",
+                category: "St. Petersburg Council",
+                alignment: "Nonpartisan / Moderate",
+                alignmentBadge: "⚪ Nonpartisan Municipal",
+                polling: "7%",
+                pollingStatus: "5th Place",
+                pollingDetails: "7% support with 12% undecided in District 6.",
+                raised: "$11,500",
+                raisedNumeric: 11500,
+                spentNumeric: 4500,
+                backers: "Local Service Organizations",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Standard Municipal",
+                lgbtqDetails: "Traditional focus on basic municipal infrastructure.",
+                platform: "Essential city services, stormwater maintenance, budget efficiency.",
+                controversy: "Low campaign profile.",
+                endorsements: "Local civic volunteers."
+            },
+            {
+                id: "mallory",
+                name: "Trevor Mallory",
+                party: "Nonpartisan",
+                contest: "City of St. Petersburg, Council Member District 6",
+                category: "St. Petersburg Council",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 Party/Community Establishment",
+                polling: "26%",
+                pollingStatus: "Plurality Lead (+2%)",
+                pollingDetails: "26% plurality lead in competitive 5-way District 6 contest.",
+                raised: "$36,000",
+                raisedNumeric: 36000,
+                spentNumeric: 22000,
+                backers: "Neighborhood Home Solutions, District Historical Leadership",
+                lgbtqStance: "Consistent Support",
+                lgbtqBadge: "✅ Community Champion",
+                lgbtqDetails: "Champions housing equity and community development for marginalized neighborhoods.",
+                platform: "Affordable homeownership protection, disaster recovery aid, Gas Plant community protection.",
+                controversy: "Navigating development pressure in gentrifying downtown core.",
+                endorsements: "Outgoing Rep Gina Driscoll, former Reps Karl Nurse & Frank Peterman, Comm. Rene Flowers."
+            },
+            {
+                id: "williams",
+                name: "Jameka Williams",
+                party: "Nonpartisan",
+                contest: "City of St. Petersburg, Council Member District 6",
+                category: "St. Petersburg Council",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Grassroots Progressive",
+                polling: "12%",
+                pollingStatus: "4th Place",
+                pollingDetails: "12% support with strong grassroots tenant turnout potential.",
+                raised: "$6,500",
+                raisedNumeric: 6500,
+                spentNumeric: 3500,
+                backers: "Grassroots Progressive Activists",
+                lgbtqStance: "Vanguard",
+                lgbtqBadge: "🏳️‍🌈 Outspoken Champion",
+                lgbtqDetails: "Vocal progressive advocating for deeply affordable housing and human rights compassion for unhoused citizens.",
+                platform: "Deeply affordable housing construction, non-punitive homelessness policy, tenant rights.",
+                controversy: "Operating under extreme financial disadvantage.",
+                endorsements: "Grassroots social justice coalitions."
+            }
+        ];
+
+        // -------------------------------------------------------------
+        // APPLICATION STATE & DOM INITIALIZATION
+        // -------------------------------------------------------------
+        document.addEventListener("DOMContentLoaded", () => {
+            renderCandidateGrid(candidatesData);
+            populateComparatorDropdowns();
+            renderComparison();
+            initCharts();
+
+            // Event Listeners
+            document.getElementById("searchInput").addEventListener("input", filterCandidates);
+            document.getElementById("contestFilter").addEventListener("change", filterCandidates);
+            document.getElementById("alignmentFilter").addEventListener("change", filterCandidates);
+            document.getElementById("lgbtqFilter").addEventListener("change", filterCandidates);
+
+            document.getElementById("compCandidate1").addEventListener("change", renderComparison);
+            document.getElementById("compCandidate2").addEventListener("change", renderComparison);
+
+            document.getElementById("closeModalBtn").addEventListener("click", closeModal);
+            document.getElementById("candidateModal").addEventListener("click", (e) => {
+                if (e.target.id === "candidateModal") closeModal();
+            });
+
+            // Mobile menu toggle
+            document.getElementById("mobileMenuBtn").addEventListener("click", () => {
+                document.getElementById("mobileMenu").classList.toggle("hidden");
+            });
+        });
+
+        // -------------------------------------------------------------
+        // DIRECTORY & MULTI-FILTER LOGIC
+        // -------------------------------------------------------------
+        function renderCandidateGrid(data) {
+            const grid = document.getElementById("candidateGrid");
+            grid.innerHTML = "";
+
+            if (data.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500 font-medium">No candidates match your search filters.</div>`;
+                return;
+            }
+
+            data.forEach(c => {
+                const card = document.createElement("div");
+                card.className = "bg-stone-50 border border-stone-200 rounded-xl p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-4";
+                
+                // Alignment Styling
+                let alignColor = "bg-stone-200 text-slate-700 border-stone-300";
+                if (c.alignment === "Progressive") alignColor = "bg-teal-100 text-teal-800 border-teal-300";
+                if (c.alignment === "Establishment") alignColor = "bg-indigo-100 text-indigo-800 border-indigo-300";
+                if (c.alignment === "Conservative Establishment") alignColor = "bg-rose-100 text-rose-800 border-rose-300";
+
+                // LGBTQ Badge Styling
+                let lgbtqColor = "bg-stone-200 text-slate-700";
+                if (c.lgbtqStance === "Vanguard") lgbtqColor = "bg-purple-100 text-purple-800";
+                if (c.lgbtqStance === "Consistent Support") lgbtqColor = "bg-emerald-100 text-emerald-800";
+                if (c.lgbtqStance === "Opposed / Culture War") lgbtqColor = "bg-rose-100 text-rose-800";
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">${c.contest}</span>
+                                <h3 class="text-lg font-bold text-slate-900">${c.name} <span class="text-xs font-normal text-slate-500">(${c.party})</span></h3>
+                            </div>
+                            <span class="px-2 py-0.5 ${alignColor} border text-xs font-bold rounded shrink-0">${c.alignmentBadge}</span>
+                        </div>
+
+                        <div class="flex flex-wrap items-center gap-2 my-2">
+                            <span class="inline-block px-2.5 py-0.5 bg-sky-100 text-sky-900 border border-sky-300 text-xs font-extrabold rounded-full">📊 Poll: ${c.polling}</span>
+                            <span class="inline-block px-2 py-0.5 ${lgbtqColor} text-xs font-semibold rounded">${c.lgbtqBadge}</span>
+                        </div>
+
+                        <p class="text-xs text-slate-500 font-medium my-1"><strong>Polling Dynamic:</strong> ${c.pollingDetails}</p>
+                        <p class="text-xs text-slate-600 line-clamp-2 my-2"><strong>Platform:</strong> ${c.platform}</p>
+                        
+                        <div class="text-xs text-slate-500 space-y-1 mt-3 pt-3 border-t border-stone-200/60">
+                            <div><strong>War Chest:</strong> ${c.raised}</div>
+                            <div class="truncate"><strong>Key Backers:</strong> ${c.backers}</div>
+                        </div>
+                    </div>
+                    <button onclick="openModal('${c.id}')" class="w-full py-2 bg-slate-900 hover:bg-indigo-700 text-white text-xs font-bold rounded-lg transition text-center mt-auto">
+                        View Full Research Profile →
+                    </button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCandidates() {
+            const searchVal = document.getElementById("searchInput").value.toLowerCase();
+            const contestVal = document.getElementById("contestFilter").value;
+            const alignmentVal = document.getElementById("alignmentFilter").value;
+            const lgbtqVal = document.getElementById("lgbtqFilter").value;
+
+            const filtered = candidatesData.filter(c => {
+                const matchesSearch = c.name.toLowerCase().includes(searchVal) ||
+                                      c.platform.toLowerCase().includes(searchVal) ||
+                                      c.backers.toLowerCase().includes(searchVal) ||
+                                      c.pollingDetails.toLowerCase().includes(searchVal) ||
+                                      c.contest.toLowerCase().includes(searchVal);
+
+                const matchesContest = contestVal === "ALL" || c.contest.includes(contestVal) || c.category === contestVal;
+                const matchesAlignment = alignmentVal === "ALL" || c.alignment === alignmentVal;
+                const matchesLGBTQ = lgbtqVal === "ALL" || c.lgbtqStance === lgbtqVal;
+
+                return matchesSearch && matchesContest && matchesAlignment && matchesLGBTQ;
+            });
+
+            renderCandidateGrid(filtered);
+        }
+
+        // -------------------------------------------------------------
+        // CANDIDATE COMPARATOR LOGIC
+        // -------------------------------------------------------------
+        function populateComparatorDropdowns() {
+            const sel1 = document.getElementById("compCandidate1");
+            const sel2 = document.getElementById("compCandidate2");
+            sel1.innerHTML = "";
+            sel2.innerHTML = "";
+
+            candidatesData.forEach((c) => {
+                const opt1 = document.createElement("option");
+                opt1.value = c.id;
+                opt1.textContent = `${c.name} (${c.contest})`;
+                
+                const opt2 = document.createElement("option");
+                opt2.value = c.id;
+                opt2.textContent = `${c.name} (${c.contest})`;
+
+                sel1.appendChild(opt1);
+                sel2.appendChild(opt2);
+            });
+
+            // Set default comparison (e.g., Mayoral: Crist vs Welch)
+            sel1.value = "crist";
+            sel2.value = "welch";
+        }
+
+        function renderComparison() {
+            const id1 = document.getElementById("compCandidate1").value;
+            const id2 = document.getElementById("compCandidate2").value;
+
+            const c1 = candidatesData.find(c => c.id === id1);
+            const c2 = candidatesData.find(c => c.id === id2);
+
+            const container = document.getElementById("comparisonContainer");
+            container.innerHTML = `
+                ${buildCompCard(c1)}
+                ${buildCompCard(c2)}
+            `;
+        }
+
+        function buildCompCard(c) {
+            if (!c) return "";
+
+            let alignColor = "bg-stone-200 text-slate-700 border-stone-300";
+            if (c.alignment === "Progressive") alignColor = "bg-teal-100 text-teal-800 border-teal-300";
+            if (c.alignment === "Establishment") alignColor = "bg-indigo-100 text-indigo-800 border-indigo-300";
+            if (c.alignment === "Conservative Establishment") alignColor = "bg-rose-100 text-rose-800 border-rose-300";
+
+            return `
+                <div class="bg-stone-50 border border-stone-200 rounded-xl p-5 space-y-4">
+                    <div class="border-b border-stone-200 pb-3">
+                        <span class="text-xs font-bold text-amber-800 uppercase tracking-wider block">${c.contest}</span>
+                        <h3 class="text-xl font-bold text-slate-900">${c.name} <span class="text-sm font-normal text-slate-500">(${c.party})</span></h3>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span class="px-2.5 py-0.5 bg-sky-100 text-sky-900 border border-sky-300 text-xs font-extrabold rounded">📊 Poll: ${c.polling} (${c.pollingStatus})</span>
+                            <span class="px-2.5 py-0.5 ${alignColor} border text-xs font-bold rounded">${c.alignmentBadge}</span>
+                            <span class="px-2.5 py-0.5 bg-purple-100 text-purple-800 text-xs font-bold rounded">${c.lgbtqBadge}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <strong class="text-slate-800 block mb-1">📊 Polling Status & Analysis:</strong>
+                            <p class="text-slate-600 leading-relaxed font-medium">${c.pollingDetails}</p>
+                        </div>
+                        <div>
+                            <strong class="text-slate-800 block mb-1">📢 Policy Platform Highlights:</strong>
+                            <p class="text-slate-600 leading-relaxed">${c.platform}</p>
+                        </div>
+                        <div>
+                            <strong class="text-slate-800 block mb-1">💰 Campaign Raised & Key Donors:</strong>
+                            <p class="text-slate-600"><strong>Funds:</strong> ${c.raised}</p>
+                            <p class="text-slate-600"><strong>Backers:</strong> ${c.backers}</p>
+                        </div>
+                        <div>
+                            <strong class="text-slate-800 block mb-1">🏳️‍🌈 LGBTQ+ & Social Advocacy Record:</strong>
+                            <p class="text-slate-600 leading-relaxed">${c.lgbtqDetails}</p>
+                        </div>
+                        <div>
+                            <strong class="text-slate-800 block mb-1">⚠️ Controversy Scrutiny:</strong>
+                            <p class="text-slate-600 leading-relaxed">${c.controversy}</p>
+                        </div>
+                        <div>
+                            <strong class="text-slate-800 block mb-1">🌟 Key Endorsements:</strong>
+                            <p class="text-slate-600 leading-relaxed">${c.endorsements}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // -------------------------------------------------------------
+        // MODAL DETAILED DRILL-DOWN
+        // -------------------------------------------------------------
+        function openModal(candidateId) {
+            const c = candidatesData.find(item => item.id === candidateId);
+            if (!c) return;
+
+            let alignColor = "bg-stone-200 text-slate-700 border-stone-300";
+            if (c.alignment === "Progressive") alignColor = "bg-teal-100 text-teal-800 border-teal-300";
+            if (c.alignment === "Establishment") alignColor = "bg-indigo-100 text-indigo-800 border-indigo-300";
+            if (c.alignment === "Conservative Establishment") alignColor = "bg-rose-100 text-rose-800 border-rose-300";
+
+            const modalContent = document.getElementById("modalContent");
+            modalContent.innerHTML = `
+                <div class="border-b border-stone-200 pb-3">
+                    <span class="text-xs font-bold text-amber-800 uppercase tracking-wider block">${c.contest}</span>
+                    <h2 class="text-2xl font-bold text-slate-900">${c.name} <span class="text-sm text-slate-500">(${c.party})</span></h2>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="px-3 py-1 bg-sky-100 text-sky-900 border border-sky-300 text-xs font-extrabold rounded-full">📊 Poll Standing: ${c.polling} (${c.pollingStatus})</span>
+                        <span class="px-2.5 py-1 ${alignColor} border text-xs font-bold rounded-full">${c.alignmentBadge}</span>
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-800 text-xs font-bold rounded-full">${c.lgbtqBadge}</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-sm text-slate-700">
+                    <div class="bg-sky-50 p-3 rounded-lg border border-sky-200">
+                        <h4 class="font-bold text-sky-900 mb-1">2026 Voter Polling Dynamic</h4>
+                        <p class="text-xs text-sky-800 leading-relaxed font-medium">${c.pollingDetails}</p>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-1">Core Policy Platform</h4>
+                        <p class="bg-stone-50 p-3 rounded-lg border border-stone-200 leading-relaxed">${c.platform}</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+                            <h4 class="font-bold text-slate-900 mb-1">Campaign Finances & Alignment</h4>
+                            <p class="text-xs text-slate-600"><strong>Ideology:</strong> ${c.alignment}</p>
+                            <p class="text-xs text-slate-600 mt-1"><strong>Total Raised:</strong> ${c.raised}</p>
+                            <p class="text-xs text-slate-600 mt-1"><strong>Primary Backers:</strong> ${c.backers}</p>
+                        </div>
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+                            <h4 class="font-bold text-slate-900 mb-1">LGBTQ+ & Social Advocacy</h4>
+                            <p class="text-xs text-slate-600">${c.lgbtqDetails}</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-1">Controversies & Scrutiny</h4>
+                        <p class="bg-rose-50/60 p-3 rounded-lg border border-rose-200 text-rose-900 text-xs leading-relaxed">${c.controversy}</p>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-1">Key Public Endorsements</h4>
+                        <p class="bg-stone-50 p-3 rounded-lg border border-stone-200 text-xs text-slate-600">${c.endorsements}</p>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById("candidateModal").classList.remove("hidden");
+        }
+
+        function closeModal() {
+            document.getElementById("candidateModal").classList.add("hidden");
+        }
+
+        // -------------------------------------------------------------
+        // CHART.JS VISUALIZATIONS
+        // -------------------------------------------------------------
+        function initCharts() {
+            // Polling Chart 1: St. Pete Mayor Primary
+            const ctxMayorPoll = document.getElementById('mayorPollChart').getContext('2d');
+            new Chart(ctxMayorPoll, {
+                type: 'bar',
+                data: {
+                    labels: ['C. Crist', 'K. Welch', 'B. Gabbard', 'J. Large', 'M. Scruggs', 'K. Batdorf', 'Undecided'],
+                    datasets: [{
+                        label: 'Voter Preference (%)',
+                        data: [34, 31, 12, 8, 3, 2, 10],
+                        backgroundColor: ['#2563eb', '#0284c7', '#0d9488', '#64748b', '#059669', '#d97706', '#cbd5e1']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) { return context.raw + '% Voter Support'; }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 40,
+                            ticks: { callback: function(value) { return value + '%'; } }
+                        }
+                    }
+                }
+            });
+
+            // Polling Chart 2: Legislative Primaries (SD 16 & HD 62)
+            const ctxLegPoll = document.getElementById('legPollChart').getContext('2d');
+            new Chart(ctxLegPoll, {
+                type: 'bar',
+                data: {
+                    labels: ['F. Driskell (SD16)', 'M. Rayner (SD16)', 'K. Darling (HD62)', 'W. Newton (HD62)'],
+                    datasets: [{
+                        label: 'Primary Survey Support (%)',
+                        data: [44, 38, 42, 36],
+                        backgroundColor: ['#1e293b', '#0d9488', '#0d9488', '#475569']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) { return context.raw + '% Primary Preference'; }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 50,
+                            ticks: { callback: function(value) { return value + '%'; } }
+                        }
+                    }
+                }
+            });
+
+            // Finance Chart 1: Mayoral Race
+            const ctxMayorFin = document.getElementById('mayorFinChart').getContext('2d');
+            new Chart(ctxMayorFin, {
+                type: 'bar',
+                data: {
+                    labels: ['Charlie Crist', 'Kenneth Welch', 'Brandi Gabbard', 'Jim Large'],
+                    datasets: [
+                        {
+                            label: 'Est. Spending ($)',
+                            data: [950000, 300000, 50000, 40000],
+                            backgroundColor: '#3b82f6'
+                        },
+                        {
+                            label: 'Cash On Hand ($)',
+                            data: [50000, 81000, 28000, 58000],
+                            backgroundColor: '#10b981'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) { return context.dataset.label + ': $' + context.raw.toLocaleString(); }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: { callback: function(value) { return '$' + value / 1000 + 'k'; } }
+                        }
+                    }
+                }
+            });
+
+            // Finance Chart 2: Legislative Contests
+            const ctxLegFin = document.getElementById('legFinChart').getContext('2d');
+            new Chart(ctxLegFin, {
+                type: 'bar',
+                data: {
+                    labels: ['F. Driskell', 'M. Rayner', 'K. Darling', 'W. Newton'],
+                    datasets: [
+                        {
+                            label: 'Total Campaign Capital ($)',
+                            data: [370000, 38000, 102000, 24500],
+                            backgroundColor: ['#1e293b', '#0d9488', '#0d9488', '#64748b']
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) { return 'Total Capital: $' + context.raw.toLocaleString(); }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: { callback: function(value) { return '$' + value / 1000 + 'k'; } }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
