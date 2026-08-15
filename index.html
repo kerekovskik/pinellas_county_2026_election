@@ -57,7 +57,7 @@
            1. Polling Breakdown for St. Pete Mayor & Legislative Primary.
            2. School Board & Clearwater Contests Polling.
            3. Mayoral & Legislative Campaign Raised vs Spent.
-         - Interactive Candidate Cards & Modal: Detail drill-downs for all 33 candidates including real-time polling percentages, margins, and undecided share.
+         - Interactive Candidate Cards & Modal: Detail drill-downs for all 60 candidates including real-time polling percentages, margins, and undecided share.
          - HTML/CSS Elements: Color-coded badges for polling leads, ideology, and LGBTQ+ advocacy. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
@@ -109,22 +109,22 @@
                 </div>
                 <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">2026 Electoral & Polling Analysis: Pinellas County & St. Petersburg</h1>
                 <p class="text-slate-600 text-base sm:text-lg leading-relaxed mb-6">
-                    Welcome to the comprehensive voter portal covering all 33 candidates on the 2026 Pinellas County and St. Petersburg ballot. This portal integrates **latest polling standings**, campaign funding sources, ideological alignments (Progressive vs. Establishment), controversies, and explicit civil rights/LGBTQ+ records.
+                    Welcome to the comprehensive voter portal covering all 60 candidates on the 2026 Pinellas County and St. Petersburg ballot, including the statewide &amp; congressional Democratic primary races (marked "Dem Ballot"). This portal integrates **latest polling standings**, campaign funding sources, ideological alignments (Progressive vs. Establishment), controversies, and explicit civil rights/LGBTQ+ records.
                 </p>
             </div>
 
             <!-- KEY STATS BADGES -->
             <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 pt-4 border-t border-stone-100">
                 <div class="bg-stone-50 p-3 rounded-xl text-center border border-stone-200/60">
-                    <span class="text-2xl font-bold text-slate-900">33</span>
+                    <span class="text-2xl font-bold text-slate-900">60</span>
                     <span class="block text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">Candidates</span>
                 </div>
                 <div class="bg-stone-50 p-3 rounded-xl text-center border border-stone-200/60">
-                    <span class="text-2xl font-bold text-teal-700">11</span>
+                    <span class="text-2xl font-bold text-teal-700">22</span>
                     <span class="block text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">Progressives</span>
                 </div>
                 <div class="bg-stone-50 p-3 rounded-xl text-center border border-stone-200/60">
-                    <span class="text-2xl font-bold text-indigo-700">10</span>
+                    <span class="text-2xl font-bold text-indigo-700">17</span>
                     <span class="block text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">Establishment</span>
                 </div>
                 <div class="bg-stone-50 p-3 rounded-xl text-center border border-stone-200/60">
@@ -132,7 +132,7 @@
                     <span class="block text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">GOP / Conservative</span>
                 </div>
                 <div class="bg-stone-50 p-3 rounded-xl text-center border border-stone-200/60 col-span-2 sm:col-span-1">
-                    <span class="text-2xl font-bold text-amber-600">7</span>
+                    <span class="text-2xl font-bold text-amber-600">16</span>
                     <span class="block text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">Nonpartisan / Moderate</span>
                 </div>
             </div>
@@ -265,8 +265,15 @@
                         
                         <!-- Filter Race -->
                         <select id="contestFilter" class="px-3 py-2 bg-stone-50 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            <option value="ALL">All Contests (14)</option>
-                            <option value="State Senate">State Senate Dist 16</option>
+                            <option value="ALL">All Contests (16)</option>
+                            <option value="U.S. Senate">U.S. Senate (Dem Ballot)</option>
+                            <option value="Governor">Governor / Lt. Gov (Dem Ballot)</option>
+                            <option value="CFO">Chief Financial Officer (Dem Ballot)</option>
+                            <option value="Agriculture">Ag Commissioner (Dem Ballot)</option>
+                            <option value="Congress 13">Congressional Dist 13 (Dem Ballot)</option>
+                            <option value="Congress 16">Congressional Dist 16 (Dem Ballot)</option>
+                            <option value="Senate 18">State Senate Dist 18 (Dem Ballot)</option>
+                            <option value="State Senate">State Senate Dist 16 &amp; 18</option>
                             <option value="State Rep">State Rep Dist 62</option>
                             <option value="County Commission">County Commission Dist 4</option>
                             <option value="Judicial">Judicial Races (Circuit/County)</option>
@@ -494,6 +501,51 @@
                             <td class="p-3 text-slate-700">Signed 2022 DeSantis parental rights pledge used to restrict LGBTQ+ discussions in public schools while focusing officially on arts education.</td>
                             <td class="p-3 text-xs text-slate-600">Rep. Bilirakis, GOP Establishment</td>
                         </tr>
+                        <tr class="hover:bg-amber-50/50 transition">
+                            <td class="p-3 font-bold text-slate-900">David Jolly</td>
+                            <td class="p-3 text-slate-600">Governor (Dem Ballot)</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-indigo-100 text-indigo-800 border border-indigo-300 text-xs font-bold rounded">🔵 Establishment</span></td>
+                            <td class="p-3 font-bold text-sky-700">Leading</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded">✅ Strong Support</span></td>
+                            <td class="p-3 text-slate-700">Former Republican who won HRC PAC, SAVE Action PAC & FL LGBTQ+ Democratic Caucus endorsements as a repudiation of HB 1557 & SB 254 — civil rights groups prioritized his general-election viability.</td>
+                            <td class="p-3 text-xs text-slate-600">HRC PAC, SAVE Action PAC, FL LGBTQ+ Dem Caucus</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50/50 transition">
+                            <td class="p-3 font-bold text-slate-900">Annette Taddeo</td>
+                            <td class="p-3 text-slate-600">CFO (Dem Ballot)</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-indigo-100 text-indigo-800 border border-indigo-300 text-xs font-bold rounded">🔵 Establishment</span></td>
+                            <td class="p-3 font-bold text-sky-700">—</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded">✅ Strong Support</span></td>
+                            <td class="p-3 text-slate-700">Strong LGBTQ+ rights advocate endorsed by Equality Florida, which described the former Miami State Senator as a "fearless voice."</td>
+                            <td class="p-3 text-xs text-slate-600">Equality Florida</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50/50 transition">
+                            <td class="p-3 font-bold text-slate-900">Don Prichard</td>
+                            <td class="p-3 text-slate-600">Ag Commissioner (Dem Ballot)</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-indigo-100 text-indigo-800 border border-indigo-300 text-xs font-bold rounded">🔵 Establishment</span></td>
+                            <td class="p-3 font-bold text-sky-700">—</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded">✅ Strong Support</span></td>
+                            <td class="p-3 text-slate-700">Career law enforcement officer & police union president who secured the Florida LGBTQ+ Democratic Caucus endorsement, bridging organized labor and civil rights advocacy.</td>
+                            <td class="p-3 text-xs text-slate-600">FL LGBTQ+ Dem Caucus, IUPA</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50/50 transition">
+                            <td class="p-3 font-bold text-slate-900">Angie Nixon</td>
+                            <td class="p-3 text-slate-600">U.S. Senate (Dem Ballot)</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-teal-100 text-teal-800 border border-teal-300 text-xs font-bold rounded">🟢 Progressive</span></td>
+                            <td class="p-3 font-bold text-sky-700">42%</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-bold rounded">🏳️‍🌈 Outspoken Champion</span></td>
+                            <td class="p-3 text-slate-700">Grassroots progressive whose intersectional, working-class platform inherently includes strong LGBTQ+ protections; arrested protesting DeSantis redistricting maps.</td>
+                            <td class="p-3 text-xs text-slate-600">Dem Progressive Caucus of FL</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50/50 transition">
+                            <td class="p-3 font-bold text-slate-900">Tamika Lyles</td>
+                            <td class="p-3 text-slate-600">Congress Dist 16 (Dem Ballot)</td>
+                            <td class="p-3"><span class="px-2 py-0.5 bg-teal-100 text-teal-800 border border-teal-300 text-xs font-bold rounded">🟢 Progressive</span></td>
+                            <td class="p-3 font-bold text-sky-700">—</td>
+                            <td class="p-3"><span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-bold rounded">🏳️‍🌈 Outspoken Champion</span></td>
+                            <td class="p-3 text-slate-700">Air Force veteran advocating highly inclusive LGBTQ+ civil rights protections within a systemic progressive platform (Medicare for All transition, military aid reform).</td>
+                            <td class="p-3 text-xs text-slate-600">Progressive grassroots networks</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -559,6 +611,54 @@
                     </p>
                     <span class="text-xs text-slate-500 font-medium">Source: Municipal Development Records</span>
                 </div>
+
+                <!-- Card 5 -->
+                <div class="p-5 bg-stone-50 rounded-xl border-l-4 border-rose-500 shadow-sm border-stone-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-slate-900 text-base">Angie Nixon (U.S. Senate, Dem Ballot)</h3>
+                        <span class="px-2 py-0.5 bg-rose-100 text-rose-800 text-xs font-bold rounded">Arrest at Sit-In</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        Nixon led a sit-in at the governor's office protesting DeSantis-administration congressional redistricting maps, resulting in her arrest. The civil disobedience solidified her progressive credentials but presents a potential liability with moderate general-election voters.
+                    </p>
+                    <span class="text-xs text-slate-500 font-medium">Source: 2026 FL Dem Primary Strategic Analysis</span>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="p-5 bg-stone-50 rounded-xl border-l-4 border-rose-500 shadow-sm border-stone-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-slate-900 text-base">John Liccione (CD 13, Dem Ballot)</h3>
+                        <span class="px-2 py-0.5 bg-rose-100 text-rose-800 text-xs font-bold rounded">Unvetted & Insolvent</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        Excluded from the Pinellas County Democrats' vetted candidate list over past domestic abuse accusations (which he strongly denies). Despite publicly claiming a $270,000 self-loan, FEC data shows only $15,279 raised with $426 on hand — rendering the campaign functionally non-viable.
+                    </p>
+                    <span class="text-xs text-slate-500 font-medium">Source: Pinellas County Dems & FEC Reports</span>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="p-5 bg-stone-50 rounded-xl border-l-4 border-amber-500 shadow-sm border-stone-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-slate-900 text-base">Ford, Atkins & Kemp (Dem Ballot Races)</h3>
+                        <span class="px-2 py-0.5 bg-amber-100 text-amber-800 text-xs font-bold rounded">District Hopping</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        Earle Ford dropped his CD 13 bid for CFO (transferring with &lt;$1,000 despite raising ~$600k); Joey Mendoza Atkins abandoned a U.S. Senate special election bid for Agriculture Commissioner ($180 from donors); Karla Kemp fled CD 13 for State Senate 18 hours before the deadline ($612 raised) — signaling strategic weakness and leaving functionally insolvent campaigns.
+                    </p>
+                    <span class="text-xs text-slate-500 font-medium">Source: Florida Politics & 2026 FL Dem Primary Strategic Analysis</span>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="p-5 bg-stone-50 rounded-xl border-l-4 border-indigo-500 shadow-sm border-stone-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-slate-900 text-base">David Jolly (Governor, Dem Ballot)</h3>
+                        <span class="px-2 py-0.5 bg-indigo-100 text-indigo-800 text-xs font-bold rounded">Party-Switch Skepticism</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        A former Republican Congressman who switched parties only recently, Jolly faces progressive critics who argue he cannot authentically represent the Democratic base and view his centrist pivot as political convenience rather than conviction.
+                    </p>
+                    <span class="text-xs text-slate-500 font-medium">Source: 2026 FL Dem Primary Strategic Analysis</span>
+                </div>
             </div>
         </section>
 
@@ -585,7 +685,7 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         // -------------------------------------------------------------
-        // CANDIDATE DATABASE (Updated with 2026 Polling Data & Alignment)
+        // CANDIDATE DATABASE (Updated with 2026 Polling Data, Alignment & Dem Primary Ballot Races)
         // -------------------------------------------------------------
         const candidatesData = [
             // State Senate 16
@@ -1450,6 +1550,509 @@
                 platform: "Deeply affordable housing construction, non-punitive homelessness policy, tenant rights.",
                 controversy: "Operating under extreme financial disadvantage.",
                 endorsements: "Grassroots social justice coalitions."
+            },
+
+            // ============================================================
+            // 2026 DEMOCRATIC PRIMARY BALLOT (Source: Strategic Analysis of the
+            // 2026 Florida Democratic Primary — democart_ballot.md)
+            // ============================================================
+
+            // U.S. Senate (Dem Ballot)
+            {
+                id: "vindman",
+                name: "Alex Vindman",
+                party: "DEM",
+                contest: "U.S. Senate (Dem Ballot)",
+                category: "U.S. Senate",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 Establishment / Moderate",
+                polling: "40%",
+                pollingStatus: "Trailing Moody (-10%)",
+                pollingDetails: "No public Dem primary head-to-head poll. UNF (July 2026) general matchup: trails GOP incumbent Ashley Moody 40% to 50% — rival Nixon polls slightly better (42%) despite Vindman's massive financial lead. Strategy targets NPA & moderate GOP voters along the I-4 corridor.",
+                raised: "$14,500,000 ($6.5M COH)",
+                raisedNumeric: 14500000,
+                spentNumeric: 8000000,
+                backers: "National donor network from impeachment prominence, AFGE, CWA",
+                lgbtqStance: "Consistent Support",
+                lgbtqBadge: "✅ Institutional Ally",
+                lgbtqDetails: "Aligns with standard Democratic platform protecting civil rights against conservative legislative encroachment; not a centerpiece of campaign.",
+                platform: "Affordability: cutting home insurance, gas & utility costs; opposes the Iran war as 'foolish and dangerous'; rejects abolishing the Senate and democratic socialism as unelectable in Florida.",
+                controversy: "Attacked by Nixon as a 'career politician' relying on his anti-Trump whistleblower legacy; criticized for dodging primary debates and allegedly refusing to meet with certain marginalized communities.",
+                endorsements: "AFGE, Communications Workers of America (CWA), State Sen. Tina Polsky."
+            },
+            {
+                id: "nixon",
+                name: "Angie Nixon",
+                party: "DEM",
+                contest: "U.S. Senate (Dem Ballot)",
+                category: "U.S. Senate",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Progressive Insurgent",
+                polling: "42%",
+                pollingStatus: "Trailing Moody (-8%)",
+                pollingDetails: "Competitive despite a staggering 23:1 funding disadvantage, driven by strong base among Black, female, and traditional Democratic voters. UNF (July 2026) general matchup: Moody 50%, Nixon 42% — slightly better than Vindman.",
+                raised: "$625,000 ($118k COH)",
+                raisedNumeric: 625000,
+                spentNumeric: 507000,
+                backers: "Grassroots small donors, Democratic Progressive Caucus of Florida",
+                lgbtqStance: "Vanguard",
+                lgbtqBadge: "🏳️‍🌈 Intersectional Advocate",
+                lgbtqDetails: "Strong support for LGBTQ+ protections as part of an intersectional, working-class grassroots platform.",
+                platform: "Medicare for All, reinstate ACA subsidies on day one, repeal the 2025 tax-and-spending law benefiting the ultra-rich, childcare expansion, blocking grocery chain price gouging.",
+                controversy: "Arrested leading a sit-in at the governor's office protesting DeSantis-administration congressional redistricting maps — galvanizes the base but a potential general-election liability with moderates.",
+                endorsements: "Democratic Progressive Caucus of Florida; aligned with DSA-platform elements."
+            },
+
+            // Governor / Lt. Governor (Dem Ballot)
+            {
+                id: "jolly",
+                name: "David Jolly (w/ Gwen Graham)",
+                party: "DEM",
+                contest: "Governor / Lt. Governor (Dem Ballot)",
+                category: "Governor",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 Pragmatic Centrist (Ex-GOP)",
+                polling: "Leading",
+                pollingStatus: "Primary Frontrunner",
+                pollingDetails: "Leads the Democratic primary comfortably. General vs. GOP frontrunner Byron Donalds is tight: trails 40–45% (UNF), and just 47–49% among likely voters (JMI/Targoz) — strong cross-aisle competitiveness.",
+                raised: "$9,000,000+ ($3.5M COH)",
+                raisedNumeric: 9000000,
+                spentNumeric: 5500000,
+                backers: "Institutional Democratic donors; dwarfed by Donalds' $103M war chest (Ken Griffin mega-donors)",
+                lgbtqStance: "Consistent Support",
+                lgbtqBadge: "✅ HRC, SAVE & LGBTQ+ Caucus Endorsed",
+                lgbtqDetails: "Aggressively courted and won Human Rights Campaign PAC, SAVE Action PAC & Florida LGBTQ+ Democratic Caucus backing — framed as a direct repudiation of HB 1557 and SB 254. LGBTQ+ orgs prioritized general-election viability over ideological purity.",
+                platform: "Economic affordability, solving the property insurance crisis, protecting public education, ending DeSantis-era culture wars. Running mate: former U.S. Rep. Gwen Graham (daughter of Gov. Bob Graham).",
+                controversy: "Former Republican Congressman with a recent party switch — progressives argue his centrist pivot is political convenience rather than conviction.",
+                endorsements: "Human Rights Campaign PAC, SAVE Action PAC, Florida LGBTQ+ Democratic Caucus."
+            },
+            {
+                id: "joseph",
+                name: "Dotie Joseph",
+                party: "DEM",
+                contest: "Governor / Lt. Governor (Dem Ballot)",
+                category: "Governor",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Progressive Legislator",
+                polling: "N/A",
+                pollingStatus: "Trailing Jolly",
+                pollingDetails: "Most prominent challenger to Jolly but entered late following Orange County Mayor Jerry Demings' withdrawal; no dominant polling showing against Jolly's financial machine.",
+                raised: "Not disclosed",
+                raisedNumeric: 0,
+                spentNumeric: 0,
+                backers: "Progressive legislative allies, Haitian-American community networks",
+                lgbtqStance: "Consistent Support",
+                lgbtqBadge: "✅ Progressive Ally",
+                lgbtqDetails: "Standard progressive civil rights record as a battle-tested state legislator.",
+                platform: "State Rep. (HD 108, North Miami/Little Haiti): affordable housing, healthcare, quality education, immigrant rights & Temporary Protected Status advocacy. Argues voters deserve a 'true Democrat' who fought the GOP supermajority in the trenches.",
+                controversy: "Late entry leaves minimal organization and funding against Jolly's $9M war chest — path relies entirely on grassroots mobilization and debates.",
+                endorsements: "None major reported in primary analysis."
+            },
+            {
+                id: "foster",
+                name: "Dayna Marie Foster",
+                party: "DEM",
+                contest: "Governor / Lt. Governor (Dem Ballot)",
+                category: "Governor",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Grassroots Educator",
+                polling: "N/A",
+                pollingStatus: "Low-Profile",
+                pollingDetails: "Grassroots candidate with no significant polling footprint; part of the crowded field flanking Jolly from the left.",
+                raised: "Not disclosed",
+                raisedNumeric: 0,
+                spentNumeric: 0,
+                backers: "Grassroots education & youth networks",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Not Central to Platform",
+                lgbtqDetails: "Platform centers systemic reform and educational equity; no specific LGBTQ+ record reported.",
+                platform: "High school mathematics teacher from Fort Lauderdale aggressively courting younger voters around systemic reform and educational equity.",
+                controversy: "Lacks the financial backing of Jolly; reliant on grassroots mobilization.",
+                endorsements: "None major reported."
+            },
+            {
+                id: "castillobach",
+                name: "Evelyn Castillo-Bach",
+                party: "DEM",
+                contest: "Governor / Lt. Governor (Dem Ballot)",
+                category: "Governor",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Criminal Justice Reformer",
+                polling: "N/A",
+                pollingStatus: "Low-Profile",
+                pollingDetails: "No significant polling footprint in a primary dominated by Jolly's fundraising advantage.",
+                raised: "Not disclosed",
+                raisedNumeric: 0,
+                spentNumeric: 0,
+                backers: "Criminal justice reform networks (Balanced Justice Network)",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Not Central to Platform",
+                lgbtqDetails: "Platform focuses on criminal justice reform; no specific LGBTQ+ record reported.",
+                platform: "Executive Director of the Balanced Justice Network: criminal justice reform, banning medical debt, halting predatory corporate landlords, moratorium on new AI data centers pending environmental assessments.",
+                controversy: "Lacks financial backing; uphill path reliant on grassroots mobilization and debate performances.",
+                endorsements: "None major reported."
+            },
+            {
+                id: "fernandez",
+                name: "Thomas Eloy Fernandez",
+                party: "DEM",
+                contest: "Governor / Lt. Governor (Dem Ballot)",
+                category: "Governor",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Niche Progressive",
+                polling: "N/A",
+                pollingStatus: "Low-Profile",
+                pollingDetails: "Running a lower-profile campaign aimed at niche progressive segments with no measurable polling support.",
+                raised: "Not disclosed",
+                raisedNumeric: 0,
+                spentNumeric: 0,
+                backers: "Niche progressive segments",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Not Central to Platform",
+                lgbtqDetails: "No specific LGBTQ+ record reported in primary analysis.",
+                platform: "Lower-profile progressive campaign lacking organizational capacity to challenge the frontrunners.",
+                controversy: "Lacks organizational capacity in a Jolly-dominated field.",
+                endorsements: "None major reported."
+            },
+            {
+                id: "norman",
+                name: "Stephann Norman",
+                party: "DEM",
+                contest: "Governor / Lt. Governor (Dem Ballot)",
+                category: "Governor",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Niche Progressive",
+                polling: "N/A",
+                pollingStatus: "Low-Profile",
+                pollingDetails: "Running a lower-profile campaign aimed at niche progressive segments with no measurable polling support.",
+                raised: "Not disclosed",
+                raisedNumeric: 0,
+                spentNumeric: 0,
+                backers: "Niche progressive segments",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Not Central to Platform",
+                lgbtqDetails: "No specific LGBTQ+ record reported in primary analysis.",
+                platform: "Lower-profile progressive campaign lacking organizational capacity to challenge the frontrunners.",
+                controversy: "Lacks organizational capacity in a Jolly-dominated field.",
+                endorsements: "None major reported."
+            },
+
+            // Chief Financial Officer (Dem Ballot)
+            {
+                id: "taddeo",
+                name: "Annette Taddeo",
+                party: "DEM",
+                contest: "Chief Financial Officer (Dem Ballot)",
+                category: "CFO",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 Establishment Favorite",
+                polling: "N/A",
+                pollingStatus: "Well-Positioned",
+                pollingDetails: "Internal polling reportedly shows her well-positioned to challenge GOP incumbent Blaise Ingoglia in the general election; clear establishment favorite in the primary.",
+                raised: "$46,000 ($19k COH)",
+                raisedNumeric: 46000,
+                spentNumeric: 27000,
+                backers: "Institutional Democratic network, state matching funds",
+                lgbtqStance: "Consistent Support",
+                lgbtqBadge: "✅ Equality Florida Endorsed",
+                lgbtqDetails: "Strong LGBTQ+ rights advocate; Equality Florida endorsed her as a 'fearless voice.'",
+                platform: "Pragmatic moderate; former State Senator from Miami with strong institutional ties; positioned as the viable general-election challenger to Ingoglia.",
+                controversy: "Entered the race relatively late, compressing her fundraising window.",
+                endorsements: "Equality Florida."
+            },
+            {
+                id: "ford",
+                name: "Earle Ford",
+                party: "DEM",
+                contest: "Chief Financial Officer (Dem Ballot)",
+                category: "CFO",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Progressive (DPC Endorsed)",
+                polling: "N/A",
+                pollingStatus: "Financially Vulnerable",
+                pollingDetails: "No public polling; campaign financially reset after transferring from CD 13, leaving him highly vulnerable against Taddeo's established network.",
+                raised: "<$1,000 COH after transfer ($8k personal loan to qualify)",
+                raisedNumeric: 1000,
+                spentNumeric: 0,
+                backers: "Democratic Progressive Caucus of Florida",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Not Central to Platform",
+                lgbtqDetails: "Progressive caucus-backed, but platform centers on financial oversight rather than civil rights advocacy.",
+                platform: "U.S. Army paratrooper veteran and former IRS estate & gift tax attorney: exact forensic oversight of Florida's failing insurance market, zero-tolerance anti-corruption, rigorous auditing of rate hikes.",
+                controversy: "District hopping: spent the cycle running for CD 13, then abruptly dropped out deeming DCCC-backed Leela Gray insurmountable, transferring to CFO with less than $1,000 despite raising ~$600k in the congressional bid; needed an $8,000 personal loan to cover the qualifying fee.",
+                endorsements: "Democratic Progressive Caucus of Florida."
+            },
+
+            // Commissioner of Agriculture (Dem Ballot)
+            {
+                id: "prichard",
+                name: "Donald A. 'Don' Prichard",
+                party: "DEM",
+                contest: "Commissioner of Agriculture (Dem Ballot)",
+                category: "Agriculture",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 Labor & Law Enforcement",
+                polling: "N/A",
+                pollingStatus: "Viable",
+                pollingDetails: "No public polling; holds the organizational and endorsement edge over Atkins in a low-visibility primary.",
+                raised: "$24,500 (incl. $15,500 personal loans)",
+                raisedNumeric: 24500,
+                spentNumeric: 0,
+                backers: "International Union of Police Associations network, labor organizations",
+                lgbtqStance: "Consistent Support",
+                lgbtqBadge: "✅ FL LGBTQ+ Caucus Endorsed",
+                lgbtqDetails: "Secured the Florida LGBTQ+ Democratic Caucus endorsement — a notable achievement for a career law enforcement officer — signaling commitment to inclusive state policies.",
+                platform: "Pembroke Park police captain & former Broward Sheriff's deputy; longtime police union president bridging organized labor and civil rights advocacy.",
+                controversy: "Campaign majority-funded by personal loans ($15,500 of $24,500).",
+                endorsements: "Florida LGBTQ+ Democratic Caucus."
+            },
+            {
+                id: "atkins",
+                name: "Joey Mendoza Atkins",
+                party: "DEM",
+                contest: "Commissioner of Agriculture (Dem Ballot)",
+                category: "Agriculture",
+                alignment: "Nonpartisan / Moderate",
+                alignmentBadge: "⚪ Low-Profile Moderate",
+                polling: "N/A",
+                pollingStatus: "Severely Underfunded",
+                pollingDetails: "No public polling; severe financial insolvency and lack of organizational support severely limit viability.",
+                raised: "$180 from donors + $8,480 personal loan",
+                raisedNumeric: 8660,
+                spentNumeric: 0,
+                backers: "None significant reported",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Not Central to Platform",
+                lgbtqDetails: "No specific LGBTQ+ record reported in primary analysis.",
+                platform: "Attorney and former sports agent: protecting Florida's waterways, supporting the citrus industry, expanding right-to-repair for farmers.",
+                controversy: "District hopping: briefly entered the 2026 U.S. Senate special election before withdrawing to run for Agriculture Commissioner — a lack of strategic focus that left the campaign functionally insolvent.",
+                endorsements: "None significant reported."
+            },
+
+            // Congressional District 13 (Dem Ballot)
+            {
+                id: "gray",
+                name: "Leela Gray",
+                party: "DEM",
+                contest: "Congressional District 13 (Dem Ballot)",
+                category: "Congress 13",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 DCCC-Backed Frontrunner",
+                polling: "N/A",
+                pollingStatus: "Primary Frontrunner",
+                pollingDetails: "Undisputed establishment favorite working closely with the DCCC; only Democrat financially equipped to face GOP incumbent Anna Paulina Luna's $3.2M war chest in the DeSantis-redrawn district.",
+                raised: "$1,223,069 ($683k COH)",
+                raisedNumeric: 1223069,
+                spentNumeric: 539774,
+                backers: "DCCC, VoteVets, End Citizens United, Florida AFL-CIO, EMILY's List",
+                lgbtqStance: "Consistent Support",
+                lgbtqBadge: "✅ EMILY's List Endorsed",
+                lgbtqDetails: "EMILY's List backing (pro-choice Democratic women) inherently aligns her with strong LGBTQ+ and reproductive rights advocacy.",
+                platform: "30-year Army veteran (Elon, Army War College, Stetson Law): cutting corporate red tape, addressing the property insurance crisis, protecting Social Security & Medicare, banning insider stock trading for members of Congress.",
+                controversy: "Running in a district controversially gerrymandered to crack deep-blue St. Petersburg communities and favor GOP incumbent Anna Paulina Luna.",
+                endorsements: "Pete Buttigieg, Reps. Jason Crow & Kathy Castor, VoteVets, End Citizens United, Florida AFL-CIO, EMILY's List."
+            },
+            {
+                id: "robinson",
+                name: "Brandt Robinson",
+                party: "DEM",
+                contest: "Congressional District 13 (Dem Ballot)",
+                category: "Congress 13",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Grassroots Teacher",
+                polling: "N/A",
+                pollingStatus: "Trailing Gray",
+                pollingDetails: "Raised over $100k through grassroots support but suffers a very high burn rate, leaving under $8k on hand — severely limiting broadcast media purchases.",
+                raised: "$106,026 ($7.7k COH)",
+                raisedNumeric: 106026,
+                spentNumeric: 98333,
+                backers: "Grassroots progressive small donors",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Not Central to Platform",
+                lgbtqDetails: "Local progressive activism-focused campaign; no specific LGBTQ+ record reported.",
+                platform: "Public school history teacher running a grassroots campaign centered on local progressive activism.",
+                controversy: "Described in local media as a 'history teacher who stirred controversy,' likely linked to Florida's education culture wars over teaching race and historical narratives; high burn rate drained funds.",
+                endorsements: "Local progressive activists."
+            },
+            {
+                id: "liccione",
+                name: "John W. Liccione",
+                party: "DEM",
+                contest: "Congressional District 13 (Dem Ballot)",
+                category: "Congress 13",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Fringe / Unvetted",
+                polling: "N/A",
+                pollingStatus: "Non-Viable",
+                pollingDetails: "Functionally insolvent: FEC data shows just $15,279 raised with $426 on hand, despite public claims of loaning his campaign $270,000.",
+                raised: "$15,279 ($426 COH)",
+                raisedNumeric: 15279,
+                spentNumeric: 14853,
+                backers: "Self-funded claims unverified by FEC data",
+                lgbtqStance: "Vanguard",
+                lgbtqBadge: "🏳️‍🌈 Explicit Platform Focus",
+                lgbtqDetails: "Engineer whose platform explicitly focuses on strengthening minority and LGBTQ+ protections alongside restoring Roe v. Wade reproductive rights.",
+                platform: "Strengthening minority & LGBTQ+ protections, returning to Roe v. Wade reproductive rights.",
+                controversy: "Excluded from the Pinellas County Democrats' vetted candidate list over past domestic abuse accusations (which he strongly denies); FEC records contradict his claimed $270k self-loan.",
+                endorsements: "None — excommunicated from local Democratic infrastructure."
+            },
+
+            // Congressional District 16 (Dem Ballot)
+            {
+                id: "kirschner",
+                name: "Kelly Kirschner",
+                party: "DEM",
+                contest: "Congressional District 16 (Dem Ballot)",
+                category: "Congress 16",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 Labor-Backed Establishment",
+                polling: "N/A",
+                pollingStatus: "Labor Frontrunner",
+                pollingDetails: "Open seat (Vern Buchanan retiring) in a formidable GOP stronghold; national party views it as a lower-tier pickup, and likely GOP nominee Sydney Gruters has already raised $1M+.",
+                raised: "Not disclosed",
+                raisedNumeric: 0,
+                spentNumeric: 0,
+                backers: "Florida AFL-CIO, regional nonprofit networks",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Not Central to Platform",
+                lgbtqDetails: "Pragmatic labor-backed campaign; no specific LGBTQ+ record reported in primary analysis.",
+                platform: "Former Mayor of Sarasota, former Eckerd College vice president, regional nonprofit leader with significant local executive experience.",
+                controversy: "Faces an uphill financial battle against the GOP frontrunner's million-dollar war chest.",
+                endorsements: "Florida AFL-CIO."
+            },
+            {
+                id: "lyles",
+                name: "Tamika Lyles",
+                party: "DEM",
+                contest: "Congressional District 16 (Dem Ballot)",
+                category: "Congress 16",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Progressive Veteran",
+                polling: "N/A",
+                pollingStatus: "Progressive Lane",
+                pollingDetails: "Competing in a 5-way open primary defined by an ideological battle between Kirschner's labor pragmatism and progressive populism.",
+                raised: "Not disclosed",
+                raisedNumeric: 0,
+                spentNumeric: 0,
+                backers: "Progressive grassroots networks",
+                lgbtqStance: "Vanguard",
+                lgbtqBadge: "🏳️‍🌈 Inclusive Rights Advocate",
+                lgbtqDetails: "Advocates highly inclusive LGBTQ+ civil rights protections as part of a systemic progressive platform.",
+                platform: "Air Force veteran, former public-school teacher, nonprofit founder: phased transition to universal healthcare (Medicare for All), suspension of offensive military aid to Israel, inclusive civil rights protections.",
+                controversy: "Staunchly progressive positions (incl. Israel military aid suspension) may face scrutiny in a general election in a GOP-leaning district.",
+                endorsements: "Progressive grassroots organizations."
+            },
+            {
+                id: "pearson",
+                name: "Glenn Pearson",
+                party: "DEM",
+                contest: "Congressional District 16 (Dem Ballot)",
+                category: "Congress 16",
+                alignment: "Progressive",
+                alignmentBadge: "🟢 Anti-Establishment Populist",
+                polling: "N/A",
+                pollingStatus: "Populist Lane",
+                pollingDetails: "Explicitly pitching as an anti-establishment Democrat fighting 'rigged Washington interests' in the 5-way open primary.",
+                raised: "Not disclosed",
+                raisedNumeric: 0,
+                spentNumeric: 0,
+                backers: "Anti-establishment donors, small business networks",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Not Central to Platform",
+                lgbtqDetails: "Platform centers on campaign finance and healthcare economics; no specific LGBTQ+ record reported.",
+                platform: "Former investigative broadcast journalist & small business owner: publicly financed federal elections, tougher disclosure requirements, immediate prescription drug negotiations, Medicaid expansion.",
+                controversy: "Anti-establishment framing limits institutional fundraising in a race already starved of national party investment.",
+                endorsements: "Reform-minded civic groups."
+            },
+            {
+                id: "jharris",
+                name: "Jon Harris",
+                party: "DEM",
+                contest: "Congressional District 16 (Dem Ballot)",
+                category: "Congress 16",
+                alignment: "Nonpartisan / Moderate",
+                alignmentBadge: "⚪ Moderate Veteran",
+                polling: "N/A",
+                pollingStatus: "Moderate Lane",
+                pollingDetails: "Relying heavily on a military-service narrative to appeal to moderate voters in the 5-way open primary.",
+                raised: "Not disclosed",
+                raisedNumeric: 0,
+                spentNumeric: 0,
+                backers: "Veteran & moderate networks",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Not Central to Platform",
+                lgbtqDetails: "Military service-narrative campaign; no specific LGBTQ+ record reported.",
+                platform: "U.S. Army Reserve officer and combat veteran; moderate appeal built on military service.",
+                controversy: "Thin policy profile beyond the military narrative in a crowded field.",
+                endorsements: "None major reported."
+            },
+            {
+                id: "schneider",
+                name: "Jan Schneider",
+                party: "DEM",
+                contest: "Congressional District 16 (Dem Ballot)",
+                category: "Congress 16",
+                alignment: "Nonpartisan / Moderate",
+                alignmentBadge: "⚪ Perennial Candidate",
+                polling: "N/A",
+                pollingStatus: "Perennial Candidate",
+                pollingDetails: "Frequently runs in this district without gaining significant electoral traction.",
+                raised: "Not disclosed",
+                raisedNumeric: 0,
+                spentNumeric: 0,
+                backers: "Self-directed campaign",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Not Central to Platform",
+                lgbtqDetails: "No specific LGBTQ+ record reported in primary analysis.",
+                platform: "Lawyer and perennial candidate repeatedly contesting this district.",
+                controversy: "Pattern of repeated unsuccessful candidacies without traction.",
+                endorsements: "None major reported."
+            },
+
+            // State Senate District 18 (Dem Ballot)
+            {
+                id: "lkharris",
+                name: "Linda Kellis Harris",
+                party: "DEM",
+                contest: "State Senate District 18 (Dem Ballot)",
+                category: "Senate 18",
+                alignment: "Establishment",
+                alignmentBadge: "🔵 Local Party Apparatus",
+                polling: "N/A",
+                pollingStatus: "Low-Profile Primary",
+                pollingDetails: "Filed and qualified early, representing the standard local party apparatus; neither candidate has resources for a visible campaign against GOP incumbent Nick DiCeglie.",
+                raised: "$2,268",
+                raisedNumeric: 2268,
+                spentNumeric: 0,
+                backers: "Local party network",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Not Central to Platform",
+                lgbtqDetails: "Low-profile local campaign; no specific LGBTQ+ record reported.",
+                platform: "Standard local party apparatus candidate with a low-profile campaign.",
+                controversy: "Extremely low-budget, low-information primary where neither candidate can run a visible campaign.",
+                endorsements: "Local party figures."
+            },
+            {
+                id: "kemp",
+                name: "Karla Kemp",
+                party: "DEM",
+                contest: "State Senate District 18 (Dem Ballot)",
+                category: "Senate 18",
+                alignment: "Nonpartisan / Moderate",
+                alignmentBadge: "⚪ District-Hopper",
+                polling: "N/A",
+                pollingStatus: "Low-Profile Primary",
+                pollingDetails: "Transferred into SD 18 just hours before the filing deadline after abandoning the CD 13 race; carries only $612 raised into a low-budget primary.",
+                raised: "$612",
+                raisedNumeric: 612,
+                spentNumeric: 0,
+                backers: "Minimal donor base carried over from CD 13 bid",
+                lgbtqStance: "Neutral / Standard",
+                lgbtqBadge: "⚖️ Not Central to Platform",
+                lgbtqDetails: "First-responder background platform; no specific LGBTQ+ record reported.",
+                platform: "Former paramedic and firefighter: healthcare, coastal sustainability, and election protections.",
+                controversy: "District hopping: spent the cycle running in crowded CD 13, then abruptly shifted to SD 18 hours before the deadline after observing Leela Gray's insurmountable dominance — signaling a search for viability rather than organic district roots.",
+                endorsements: "None major reported."
             }
         ];
 
