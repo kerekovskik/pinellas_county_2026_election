@@ -1,0 +1,105 @@
+[
+  {
+    "id": "statewideFinChart",
+    "title": "Statewide War Chests: Campaign + Political Committees ($)",
+    "subtitle": "Florida Division of Elections totals through Oct 25, 2026 (campaign account plus affiliated political committees, per Sparkers Soapbox) and FEC/Tampa Bay Times totals for U.S. Senate. Donalds' $169M is the largest in Florida history.",
+    "horizontal": true,
+    "labels": [
+      "Donalds (R) Gov",
+      "Jolly (D) Gov",
+      "Simpson (R) Ag",
+      "Moody (R) Sen",
+      "Uthmeier (R) AG",
+      "Ingoglia (R) CFO",
+      "Nixon (D) Sen",
+      "Rodriguez (D) AG",
+      "Taddeo (D) CFO",
+      "Atkins (D) Ag"
+    ],
+    "datasets": [
+      {
+        "label": "Total raised",
+        "data": [
+          168800000,
+          26000000,
+          48400000,
+          20600000,
+          15500000,
+          14000000,
+          8500000,
+          3800000,
+          814000,
+          91000
+        ],
+        "colors": [
+          "#be123c",
+          "#1d4ed8",
+          "#be123c",
+          "#be123c",
+          "#be123c",
+          "#be123c",
+          "#1d4ed8",
+          "#1d4ed8",
+          "#1d4ed8",
+          "#1d4ed8"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "localFinChart",
+    "title": "Pinellas Local Races: Money Raised ($)",
+    "subtitle": "St. Petersburg mayor totals combine campaign accounts and political committees (St. Pete Shines for Crist, St. Petersburg Progress for Welch) per Florida Politics and Tampa Bay Times, Oct 2026; Welch's figure is a floor because his campaign-account total was not published. Others per Pinellas SOE reports and local coverage.",
+    "horizontal": true,
+    "labels": [
+      "Crist (St. Pete Mayor)",
+      "Welch (St. Pete Mayor)",
+      "Scott (R) BOCC D2",
+      "K. Peters (R) BOCC D6",
+      "Mallory (St. Pete D6)",
+      "Hament (St. Pete D2)",
+      "Wilson (Clearwater 5)",
+      "Grove (St. Pete D6)",
+      "Hughes (D) BOCC D2",
+      "Campogni (School Bd 3)",
+      "D. Peters (School Bd 3)",
+      "Glenn (D) BOCC D6",
+      "Bunker (Clearwater 5)"
+    ],
+    "datasets": [
+      {
+        "label": "Total raised",
+        "data": [
+          2250000,
+          488000,
+          199089,
+          189964,
+          66000,
+          64000,
+          63000,
+          58000,
+          43331,
+          29240,
+          21925,
+          15105,
+          9000
+        ],
+        "colors": [
+          "#1d4ed8",
+          "#1d4ed8",
+          "#be123c",
+          "#be123c",
+          "#4f46e5",
+          "#4f46e5",
+          "#be123c",
+          "#0d9488",
+          "#1d4ed8",
+          "#78716c",
+          "#be123c",
+          "#1d4ed8",
+          "#4f46e5"
+        ]
+      }
+    ]
+  }
+]

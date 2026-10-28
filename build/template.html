@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 Pinellas County General Election Voter Guide</title>
+    <meta name="description" content="Nonpartisan research guide to every candidate, judicial retention vote, and ballot question on the November 3, 2026 Pinellas County general election ballot.">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        .chart-container { position: relative; width: 100%; max-width: 650px; margin-left: auto; margin-right: auto; height: 320px; max-height: 380px; }
+        @media (min-width: 768px) { .chart-container { height: 360px; } }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        details > summary { cursor: pointer; list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] > summary .chev { transform: rotate(90deg); }
+        .chev { display: inline-block; transition: transform .15s ease; }
+        html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+    </style>
+</head>
+<body class="bg-stone-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Chosen Palette: Warm Neutral & Slate Indigo (matches the primary-election guide, index_primary.html) -->
+    <!-- Application Structure Plan:
+         1. Overview: what is on the Nov 3, 2026 ballot, key stats, key dates, early voting sites.
+         2. How To Read This Guide: alignment & LGBTQ+ stance legends (5 alignment lanes now that GOP, LPF and NPA candidates appear).
+         3. Polling Dashboard: statewide top-of-ticket polling plus key race insight cards.
+         4. Candidate Directory: every candidate on the ballot, searchable and filterable by contest, alignment, LGBTQ+ stance.
+         5. Head-to-Head Comparator.
+         6. Ballot Questions: 3 statewide constitutional amendments + 15 municipal questions, filterable by city, with full ballot text.
+         7. Judicial Merit Retention: Supreme Court + Second DCA.
+         8. Finances: top-of-ticket and local money charts.
+         9. LGBTQ+ Matrix (generated from candidate data) and Controversy Radar.
+         All candidate / measure / judicial data lives in JSON constants at the bottom of this file. -->
+
+    <!-- TOP NAV / HEADER -->
+    <header class="bg-slate-900 text-white sticky top-0 z-40 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">🗳️</span>
+                <span class="font-bold text-lg sm:text-xl tracking-tight text-amber-400 whitespace-nowrap">Pinellas Voter Guide 2026 <span class="hidden sm:inline xl:hidden 2xl:inline text-stone-300 font-medium text-sm">· General Election</span></span>
+            </div>
+            <nav class="hidden xl:flex space-x-3 2xl:space-x-5 text-xs 2xl:text-sm font-medium whitespace-nowrap">
+                <a href="#overview" class="hover:text-amber-300 transition">Overview</a>
+                <a href="#alignment-guide" class="hover:text-amber-300 transition">How to Read</a>
+                <a href="#polling-dashboard" class="hover:text-amber-300 transition">Polling</a>
+                <a href="#directory" class="hover:text-amber-300 transition">Candidates</a>
+                <a href="#comparator" class="hover:text-amber-300 transition">Compare</a>
+                <a href="#measures" class="hover:text-amber-300 transition">Ballot Questions</a>
+                <a href="#judicial" class="hover:text-amber-300 transition">Judges</a>
+                <a href="#finances" class="hover:text-amber-300 transition">Finances</a>
+                <a href="#lgbtq-matrix" class="hover:text-amber-300 transition">LGBTQ+ Matrix</a>
+                <a href="#controversies" class="hover:text-amber-300 transition">Controversies</a>
+            </nav>
+            <div class="xl:hidden">
+                <button id="mobileMenuBtn" aria-label="Open menu" class="text-stone-300 hover:text-white focus:outline-none text-2xl">☰</button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden xl:hidden bg-slate-800 px-4 pt-2 pb-4 space-y-2 text-sm border-t border-slate-700">
+            <a href="#overview" class="block hover:text-amber-300 py-1">Overview</a>
+            <a href="#alignment-guide" class="block hover:text-amber-300 py-1">How to Read This Guide</a>
+            <a href="#polling-dashboard" class="block hover:text-amber-300 py-1">Polling</a>
+            <a href="#directory" class="block hover:text-amber-300 py-1">Candidate Directory</a>
+            <a href="#comparator" class="block hover:text-amber-300 py-1">Side-by-Side Comparator</a>
+            <a href="#measures" class="block hover:text-amber-300 py-1">Ballot Questions</a>
+            <a href="#judicial" class="block hover:text-amber-300 py-1">Judicial Retention</a>
+            <a href="#finances" class="block hover:text-amber-300 py-1">Finances</a>
+            <a href="#lgbtq-matrix" class="block hover:text-amber-300 py-1">LGBTQ+ Matrix</a>
+            <a href="#controversies" class="block hover:text-amber-300 py-1">Controversies</a>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- SECTION 1: OVERVIEW -->
+        <section id="overview" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8">
+            <div class="max-w-3xl">
+                <div class="flex flex-wrap items-center gap-2 mb-3">
+                    <span class="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-semibold rounded-full uppercase tracking-wider">November 3, 2026 General Election</span>
+                    <span class="px-3 py-1 bg-sky-100 text-sky-800 text-xs font-semibold rounded-full uppercase tracking-wider">Research current as of October 27, 2026</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Pinellas County 2026 General Election: Every Candidate, Judge &amp; Ballot Question</h1>
+                <p class="text-slate-600 text-base sm:text-lg leading-relaxed mb-3">
+                    This guide covers everything that can appear on a Pinellas County ballot on November 3, 2026: the U.S. Senate special election, Governor and the Florida Cabinet, Congress, the Legislature, County Commission, School Board, fire districts, municipal offices, five judicial merit-retention votes, three statewide constitutional amendments, and fifteen city and town questions. Each candidate profile covers polling, money and backers, ideological lane, LGBTQ+ record, platform, controversies and endorsements, with sources.
+                </p>
+                <p class="text-slate-500 text-sm leading-relaxed">
+                    Not every contest appears on every ballot. Congressional, legislative, county-district, fire-district and municipal contests depend on where you live. Unopposed candidates are not printed on the ballot. Check your sample ballot at <a class="text-indigo-700 underline" href="https://www.votepinellas.gov" target="_blank" rel="noopener">VotePinellas.gov</a>. The primary-election edition of this guide is preserved at <a class="text-indigo-700 underline" href="index_primary.html">index_primary.html</a>.
+                </p>
+            </div>
+
+            <!-- KEY STATS -->
+            <div id="keyStats" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 pt-6 mt-6 border-t border-stone-100">
+                <!-- JS populated -->
+            </div>
+
+            <!-- KEY DATES & EARLY VOTING -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-6">
+                <div class="p-4 bg-stone-50 rounded-xl border border-stone-200">
+                    <h3 class="font-bold text-slate-900 text-sm mb-2">📅 Key Dates</h3>
+                    <table class="w-full text-xs text-slate-700">
+                        <tbody class="divide-y divide-stone-200">
+                            <tr><td class="py-1.5 font-medium">Voter registration deadline</td><td class="py-1.5 text-right">October 5, 2026 <span class="text-slate-400">(passed)</span></td></tr>
+                            <tr><td class="py-1.5 font-medium">Mail ballot request deadline</td><td class="py-1.5 text-right">October 22, 2026, 5 pm <span class="text-slate-400">(passed)</span></td></tr>
+                            <tr><td class="py-1.5 font-medium">Early voting</td><td class="py-1.5 text-right font-bold text-emerald-700">Oct 19 – Nov 1, 7 am – 7 pm (open now)</td></tr>
+                            <tr><td class="py-1.5 font-medium">Election Day</td><td class="py-1.5 text-right font-bold text-slate-900">Tuesday, November 3, 2026, 7 am – 7 pm</td></tr>
+                            <tr><td class="py-1.5 font-medium">Mail ballots</td><td class="py-1.5 text-right">Must be <em>received</em> by 7 pm Nov 3; drop at any early voting site</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-4 bg-stone-50 rounded-xl border border-stone-200">
+                    <h3 class="font-bold text-slate-900 text-sm mb-2">📍 Early Voting Locations (any Pinellas voter may use any site)</h3>
+                    <ul class="text-xs text-slate-700 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
+                        <li>The Centre of Palm Harbor, 1500 16th St., Palm Harbor</li>
+                        <li>Countryside Recreation Center, 2640 Sabal Springs Dr., Clearwater</li>
+                        <li>Gulfport Neighborhood Center, 1617 49th St. S, Gulfport</li>
+                        <li>J.W. Cate Recreation Center, 5801 22nd Ave. N, St. Petersburg</li>
+                        <li>SOE Office, County Building, 501 First Ave. N, St. Petersburg</li>
+                        <li>SOE Election Service Center, 13001 Starkey Rd., Largo</li>
+                        <li>SOE Office, County Courthouse, 315 Court St., Room 117, Clearwater</li>
+                    </ul>
+                    <p class="text-xs text-slate-500 mt-2">Source: <a class="underline" href="https://www.votepinellas.gov/382/November-3-2026-General-Election-Informa" target="_blank" rel="noopener">Pinellas County Supervisor of Elections</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: HOW TO READ THIS GUIDE -->
+        <section id="alignment-guide" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8 space-y-4">
+            <div>
+                <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-semibold rounded-full uppercase tracking-wider mb-2">Framework &amp; Classification</span>
+                <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2"><span>🏷️</span> How to Read This Guide</h2>
+                <p class="text-slate-600 text-sm mt-1 leading-relaxed">
+                    Unlike the August primary, the general election puts Republicans, Democrats, Libertarians, independents and write-ins on the same ballot. Each candidate is placed in one of five ideological lanes based on party, funding sources, endorsement networks and policy record, and given an LGBTQ+ stance rating based on votes, statements and endorsements. These are editorial judgments; the sources behind each profile are listed in the candidate's full profile.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-3 pt-2">
+                <div class="p-4 bg-teal-50 border border-teal-200 rounded-xl space-y-2">
+                    <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-teal-600 inline-block"></span><h3 class="font-bold text-teal-900 text-sm">Progressive</h3></div>
+                    <p class="text-xs text-teal-800 leading-relaxed">Left of the Democratic establishment. Labor, grassroots and progressive-PAC backing; civil rights, housing justice, Medicare for All, explicit LGBTQ+ advocacy.</p>
+                </div>
+                <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-xl space-y-2">
+                    <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-indigo-600 inline-block"></span><h3 class="font-bold text-indigo-900 text-sm">Establishment</h3></div>
+                    <p class="text-xs text-indigo-800 leading-relaxed">Mainstream Democratic and center-left institutional candidates. Party committees, trade groups, pragmatic governance, caucus loyalty.</p>
+                </div>
+                <div class="p-4 bg-rose-50 border border-rose-200 rounded-xl space-y-2">
+                    <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-rose-600 inline-block"></span><h3 class="font-bold text-rose-900 text-sm">Conservative Establishment</h3></div>
+                    <p class="text-xs text-rose-800 leading-relaxed">Republican and conservative candidates. State GOP machinery, Chamber and industry PACs, culture-war groups such as Moms for Liberty; parental rights, tax cuts, restrictions on LGBTQ+ curricula and care.</p>
+                </div>
+                <div class="p-4 bg-amber-50 border border-amber-200 rounded-xl space-y-2">
+                    <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span><h3 class="font-bold text-amber-900 text-sm">Independent / Third Party</h3></div>
+                    <p class="text-xs text-amber-800 leading-relaxed">Libertarian (LPF), No Party Affiliation (NPA) and write-in candidates. Usually self-funded, rarely polled, platforms range from libertarian to populist.</p>
+                </div>
+                <div class="p-4 bg-stone-100 border border-stone-300 rounded-xl space-y-2">
+                    <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-stone-600 inline-block"></span><h3 class="font-bold text-stone-900 text-sm">Nonpartisan / Moderate</h3></div>
+                    <p class="text-xs text-stone-700 leading-relaxed">Hyper-local civic figures in nonpartisan seats (fire districts, small-city councils) focused on services, stormwater and public safety, with no clear partisan lane.</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-2 pt-2 text-xs">
+                <span class="font-bold text-slate-600 self-center">LGBTQ+ stance key:</span>
+                <span class="px-2 py-1 bg-purple-100 text-purple-800 font-bold rounded">🏳️‍🌈 Vanguard: outspoken champion or openly LGBTQ+</span>
+                <span class="px-2 py-1 bg-emerald-100 text-emerald-800 font-bold rounded">✅ Consistent Support: pro-equality record or endorsements</span>
+                <span class="px-2 py-1 bg-stone-200 text-slate-700 font-bold rounded">⚖️ Neutral / Standard: no public record found</span>
+                <span class="px-2 py-1 bg-rose-100 text-rose-800 font-bold rounded">⚠️ Opposed / Culture War: restrictive votes, pledges or backers</span>
+            </div>
+        </section>
+
+        <!-- SECTION 3: POLLING DASHBOARD -->
+        <section id="polling-dashboard" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8 space-y-6">
+            <div>
+                <span class="inline-block px-3 py-1 bg-sky-100 text-sky-800 text-xs font-semibold rounded-full uppercase tracking-wider mb-2">Voter Survey Synthesis</span>
+                <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2"><span>📊</span> October 2026 Polling Snapshot &amp; Key Race Dynamics</h2>
+                <p class="text-slate-600 text-sm mt-1 leading-relaxed">
+                    Public polling exists only for the top of the ticket. Down-ballot races are characterized by primary results, district partisan lean and fundraising instead. Pollster, date and sample are given in each candidate's profile.
+                </p>
+            </div>
+            <div id="pollChartGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- JS populated charts -->
+            </div>
+            <div id="pollInsights" class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-stone-100">
+                <!-- JS populated insight cards -->
+            </div>
+        </section>
+
+        <!-- SECTION 4: CANDIDATE DIRECTORY -->
+        <section id="directory" class="space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6">
+                <div class="flex flex-col gap-4 mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2"><span>🔍</span> Candidate Directory &amp; Multi-Criteria Search</h2>
+                        <p class="text-slate-500 text-sm mt-1">Filter by contest, ideological lane, LGBTQ+ stance, party, or keyword. <span id="resultCount" class="font-semibold text-slate-700"></span></p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-3 w-full">
+                        <input type="text" id="searchInput" placeholder="Search name, platform, backers..." class="px-3 py-2 bg-stone-50 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <select id="contestFilter" class="px-3 py-2 bg-stone-50 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="ALL">All Contests</option>
+                            <!-- JS populated optgroups -->
+                        </select>
+                        <select id="alignmentFilter" class="px-3 py-2 bg-stone-50 border border-stone-300 rounded-lg text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="ALL">Ideology Lane (All)</option>
+                            <option value="Progressive">🟢 Progressive</option>
+                            <option value="Establishment">🔵 Establishment</option>
+                            <option value="Conservative Establishment">🔴 Conservative / GOP</option>
+                            <option value="Independent / Third Party">🟡 Independent / Third Party</option>
+                            <option value="Nonpartisan / Moderate">⚪ Nonpartisan / Moderate</option>
+                        </select>
+                        <select id="lgbtqFilter" class="px-3 py-2 bg-stone-50 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="ALL">LGBTQ+ Stance (All)</option>
+                            <option value="Vanguard">🏳️‍🌈 Outspoken Champion</option>
+                            <option value="Consistent Support">✅ Consistent Support</option>
+                            <option value="Neutral / Standard">⚖️ Neutral / No Record</option>
+                            <option value="Opposed / Culture War">⚠️ Opposed / Restrictive</option>
+                        </select>
+                        <select id="partyFilter" class="px-3 py-2 bg-stone-50 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="ALL">Party (All)</option>
+                            <option value="REP">Republican</option>
+                            <option value="DEM">Democrat</option>
+                            <option value="LPF">Libertarian</option>
+                            <option value="NPA">No Party Affiliation</option>
+                            <option value="WRI">Write-in</option>
+                            <option value="Nonpartisan">Nonpartisan seat</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="candidateGrid" class="space-y-8">
+                    <!-- JS populated, grouped by contest -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: COMPARATOR -->
+        <section id="comparator" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8 space-y-6">
+            <div>
+                <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-semibold rounded-full uppercase tracking-wider mb-2">Comparative Analysis</span>
+                <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2"><span>⚖️</span> Head-to-Head Candidate Comparator</h2>
+                <p class="text-slate-500 text-sm mt-1">Pick any two candidates. The dropdowns default to the top of the ticket; the "Same race" button jumps Candidate 2 to the next opponent in Candidate 1's contest.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-4 items-end bg-stone-50 p-4 rounded-xl border border-stone-200">
+                <div>
+                    <label for="compCandidate1" class="block text-xs font-bold uppercase text-slate-500 mb-1">Candidate 1</label>
+                    <select id="compCandidate1" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-lg text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-indigo-500"></select>
+                </div>
+                <button id="sameRaceBtn" class="px-3 py-2 bg-slate-900 hover:bg-indigo-700 text-white text-xs font-bold rounded-lg transition whitespace-nowrap">Same race ↔</button>
+                <div>
+                    <label for="compCandidate2" class="block text-xs font-bold uppercase text-slate-500 mb-1">Candidate 2</label>
+                    <select id="compCandidate2" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-lg text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-indigo-500"></select>
+                </div>
+            </div>
+            <div id="comparisonContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+        </section>
+
+        <!-- SECTION 6: BALLOT QUESTIONS -->
+        <section id="measures" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8 space-y-6">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+                <div>
+                    <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-full uppercase tracking-wider mb-2">Amendments, Charter Changes &amp; Bonds</span>
+                    <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2"><span>📜</span> Ballot Questions</h2>
+                    <p class="text-slate-600 text-sm mt-1 leading-relaxed">Three statewide constitutional amendments appear on every Florida ballot and need 60% to pass. The municipal questions appear only in the named city or town and pass by simple majority. Expand any card for the exact ballot language.</p>
+                </div>
+                <div class="flex items-center gap-2 w-full lg:w-auto">
+                    <label for="measureScopeFilter" class="text-xs font-bold uppercase text-slate-500 shrink-0">Show</label>
+                    <select id="measureScopeFilter" class="min-w-0 flex-1 lg:flex-none max-w-full px-3 py-2 bg-stone-50 border border-stone-300 rounded-lg text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-indigo-500">
+                        <option value="ALL">Statewide + all cities</option>
+                        <!-- JS populated -->
+                    </select>
+                </div>
+            </div>
+            <div id="statewideMeasures" class="space-y-4"></div>
+            <div id="municipalMeasures" class="space-y-8"></div>
+        </section>
+
+        <!-- SECTION 7: JUDICIAL RETENTION -->
+        <section id="judicial" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8 space-y-6">
+            <div>
+                <span class="inline-block px-3 py-1 bg-stone-200 text-stone-800 text-xs font-semibold rounded-full uppercase tracking-wider mb-2">Merit Retention · Yes / No</span>
+                <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2"><span>⚖️</span> Judicial Merit Retention</h2>
+                <p class="text-slate-600 text-sm mt-1 leading-relaxed">
+                    Florida appellate judges do not run against opponents. Voters decide "Shall Justice/Judge X be retained in office?" A judge who falls below 50% "Yes" loses the seat and the Governor appoints a replacement. No Florida appellate judge has ever lost a retention vote. The Florida Bar discontinued its merit-retention poll of lawyers after 2022, so the most recent Bar poll results (2020) are shown for each judge.
+                </p>
+            </div>
+            <div id="judicialGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5"></div>
+        </section>
+
+        <!-- SECTION 8: FINANCES -->
+        <section id="finances" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8 space-y-6">
+            <div>
+                <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-full uppercase tracking-wider mb-2">Campaign Economics</span>
+                <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2"><span>💰</span> Money, Backers &amp; Funding Gaps</h2>
+                <p class="text-slate-600 text-sm mt-1 leading-relaxed">Totals combine candidate accounts and affiliated political committees where reported. Figures are from the most recent FEC, Florida Division of Elections, or Pinellas Supervisor of Elections reports cited in each profile; hover a bar for the exact amount.</p>
+            </div>
+            <div id="finChartGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-8"></div>
+            <div id="finInsights" class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-stone-100"></div>
+        </section>
+
+        <!-- SECTION 9: LGBTQ+ MATRIX -->
+        <section id="lgbtq-matrix" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8 space-y-6">
+            <div>
+                <span class="inline-block px-3 py-1 bg-purple-100 text-purple-800 text-xs font-semibold rounded-full uppercase tracking-wider mb-2">Policy Synthesis</span>
+                <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2"><span>🏳️‍🌈</span> LGBTQ+ Rights &amp; Civil Rights Matrix</h2>
+                <p class="text-slate-600 text-sm mt-1 leading-relaxed">Every candidate with an identifiable LGBTQ+ record, champions first, restrictive records last. Candidates with no public record are omitted here but carry a ⚖️ badge in the directory.</p>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="bg-slate-900 text-white">
+                            <th class="p-3 font-semibold rounded-tl-lg">Candidate</th>
+                            <th class="p-3 font-semibold">Contest</th>
+                            <th class="p-3 font-semibold">Lane</th>
+                            <th class="p-3 font-semibold">Poll</th>
+                            <th class="p-3 font-semibold">Stance</th>
+                            <th class="p-3 font-semibold">Record</th>
+                            <th class="p-3 font-semibold rounded-tr-lg">Key Backers</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lgbtqTableBody" class="divide-y divide-stone-200 bg-stone-50"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 10: CONTROVERSY RADAR -->
+        <section id="controversies" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8 space-y-6">
+            <div>
+                <span class="inline-block px-3 py-1 bg-rose-100 text-rose-800 text-xs font-semibold rounded-full uppercase tracking-wider mb-2">Public Scrutiny</span>
+                <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2"><span>⚠️</span> Controversy Radar</h2>
+                <p class="text-slate-600 text-sm mt-1 leading-relaxed">Scandals, ethics questions, dark-money ties and administrative failures reported by identifiable outlets. Each card names its source; the candidate's full profile links to it.</p>
+            </div>
+            <div id="controversyGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+        </section>
+
+    </main>
+
+    <!-- DETAIL MODAL -->
+    <div id="candidateModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative">
+            <button id="closeModalBtn" aria-label="Close" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-2xl font-bold">×</button>
+            <div id="modalContent" class="space-y-4"></div>
+        </div>
+    </div>
+
+    <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 py-6 text-center text-xs">
+        <div class="max-w-7xl mx-auto px-4 space-y-1">
+            <p>Nonpartisan 2026 Pinellas County General Election Candidate, Ballot Question &amp; Judicial Retention Research Guide.</p>
+            <p class="text-slate-500">Ballot contents from the Pinellas County Supervisor of Elections. Candidate research compiled October 2026 from FEC and Florida Division of Elections filings, Pinellas SOE campaign finance reports, public polls, and reporting by the Tampa Bay Times, St. Pete Catalyst, Florida Politics, Tampa Bay Newspapers and others; sources are listed in each profile.</p>
+            <p class="text-slate-500">Ideological lanes and LGBTQ+ stance ratings are editorial classifications, not endorsements. Verify your own ballot at votepinellas.gov.</p>
+        </div>
+    </footer>
+
+    <script>
+        // =============================================================
+        // DATA
+        // =============================================================
+        const candidatesData = /*__CANDIDATES__*/;
+        const measuresData = /*__MEASURES__*/;
+        const judicialData = /*__JUDICIAL__*/;
+        const pollCharts = /*__POLLCHARTS__*/;
+        const pollInsights = /*__POLLINSIGHTS__*/;
+        const finCharts = /*__FINCHARTS__*/;
+        const finInsights = /*__FININSIGHTS__*/;
+        const controversies = /*__CONTROVERSIES__*/;
+        const contestNotes = /*__CONTESTNOTES__*/;
+
+        // Contest ordering and grouping follow the printed ballot.
+        const categoryGroups = {
+            "Federal": ["U.S. Senate", "Congress 13", "Congress 16"],
+            "State Executive": ["Governor", "Attorney General", "CFO", "Agriculture"],
+            "Florida Legislature": ["State Senate 18", "State Senate 21", "House 57", "House 58", "House 59", "House 60", "House 61"],
+            "County & Special Districts": ["County Commission", "School Board", "Fire Districts", "Special Districts"],
+            "Municipal": ["St. Petersburg Mayor", "St. Petersburg Council", "Clearwater", "Dunedin", "Largo", "Belleair Beach", "Seminole"]
+        };
+        const categoryOrder = Object.values(categoryGroups).flat();
+        const contestOrder = [];
+        categoryOrder.forEach(cat => {
+            candidatesData.filter(c => c.category === cat).forEach(c => { if (!contestOrder.includes(c.contest)) contestOrder.push(c.contest); });
+        });
+        candidatesData.forEach(c => { if (!contestOrder.includes(c.contest)) contestOrder.push(c.contest); });
+        const groupOfCategory = {};
+        Object.entries(categoryGroups).forEach(([g, cats]) => cats.forEach(cat => groupOfCategory[cat] = g));
+
+        // =============================================================
+        // HELPERS
+        // =============================================================
+        const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+        function alignColor(a) {
+            if (a === "Progressive") return "bg-teal-100 text-teal-800 border-teal-300";
+            if (a === "Establishment") return "bg-indigo-100 text-indigo-800 border-indigo-300";
+            if (a === "Conservative Establishment") return "bg-rose-100 text-rose-800 border-rose-300";
+            if (a === "Independent / Third Party") return "bg-amber-100 text-amber-800 border-amber-300";
+            return "bg-stone-200 text-slate-700 border-stone-300";
+        }
+        function lgbtqColor(s) {
+            if (s === "Vanguard") return "bg-purple-100 text-purple-800";
+            if (s === "Consistent Support") return "bg-emerald-100 text-emerald-800";
+            if (s === "Opposed / Culture War") return "bg-rose-100 text-rose-800";
+            return "bg-stone-200 text-slate-700";
+        }
+        function partyLabel(p) {
+            return ({ REP: "Republican", DEM: "Democrat", LPF: "Libertarian", NPA: "No Party Affiliation", WRI: "Write-in", Nonpartisan: "Nonpartisan" })[p] || p;
+        }
+        function partyPill(c) {
+            const color = { REP: "bg-red-50 text-red-800 border-red-200", DEM: "bg-blue-50 text-blue-800 border-blue-200", LPF: "bg-yellow-50 text-yellow-800 border-yellow-200", NPA: "bg-stone-100 text-stone-700 border-stone-300", WRI: "bg-stone-100 text-stone-600 border-stone-300", Nonpartisan: "bg-stone-100 text-stone-700 border-stone-300" }[c.party] || "bg-stone-100 text-stone-700 border-stone-300";
+            return `<span class="px-1.5 py-0.5 ${color} border text-[10px] font-bold rounded">${esc(c.party)}</span>${c.incumbent ? ' <span class="px-1.5 py-0.5 bg-slate-800 text-white text-[10px] font-bold rounded">INCUMBENT</span>' : ''}`;
+        }
+        function sourcesList(arr) {
+            if (!arr || !arr.length) return '<p class="text-xs text-slate-400">No sources recorded.</p>';
+            return `<ul class="text-xs text-slate-600 space-y-1 list-disc pl-4 break-all">${arr.map(u => `<li><a class="text-indigo-700 hover:underline" href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\/(www\.)?/, "").slice(0, 90))}${u.replace(/^https?:\/\/(www\.)?/, "").length > 90 ? "…" : ""}</a></li>`).join("")}</ul>`;
+        }
+        function money(n) { return "$" + Number(n).toLocaleString(); }
+
+        // =============================================================
+        // INIT
+        // =============================================================
+        document.addEventListener("DOMContentLoaded", () => {
+            renderKeyStats();
+            populateContestFilter();
+            renderCandidateGrid(candidatesData);
+            populateComparatorDropdowns();
+            renderComparison();
+            renderMeasures();
+            renderJudicial();
+            renderLgbtqMatrix();
+            renderControversies();
+            renderInsightCards("pollInsights", pollInsights);
+            renderInsightCards("finInsights", finInsights);
+            initCharts();
+
+            ["searchInput"].forEach(id => document.getElementById(id).addEventListener("input", filterCandidates));
+            ["contestFilter", "alignmentFilter", "lgbtqFilter", "partyFilter"].forEach(id => document.getElementById(id).addEventListener("change", filterCandidates));
+            document.getElementById("compCandidate1").addEventListener("change", renderComparison);
+            document.getElementById("compCandidate2").addEventListener("change", renderComparison);
+            document.getElementById("sameRaceBtn").addEventListener("click", pickSameRace);
+            document.getElementById("measureScopeFilter").addEventListener("change", renderMeasures);
+            document.getElementById("closeModalBtn").addEventListener("click", closeModal);
+            document.getElementById("candidateModal").addEventListener("click", (e) => { if (e.target.id === "candidateModal") closeModal(); });
+            document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+            document.getElementById("mobileMenuBtn").addEventListener("click", () => document.getElementById("mobileMenu").classList.toggle("hidden"));
+            document.querySelectorAll("#mobileMenu a").forEach(a => a.addEventListener("click", () => document.getElementById("mobileMenu").classList.add("hidden")));
+        });
+
+        // =============================================================
+        // OVERVIEW STATS
+        // =============================================================
+        function renderKeyStats() {
+            const count = (a) => candidatesData.filter(c => c.alignment === a).length;
+            const stats = [
+                { n: candidatesData.length, label: "Candidates", color: "text-slate-900" },
+                { n: contestOrder.length, label: "Contested Races", color: "text-slate-900" },
+                { n: measuresData.length, label: "Ballot Questions", color: "text-emerald-700" },
+                { n: judicialData.length, label: "Judicial Retention Votes", color: "text-stone-700" },
+                { n: count("Conservative Establishment"), label: "GOP / Conservative", color: "text-rose-700" },
+                { n: count("Progressive") + count("Establishment"), label: "Democratic Lane (Prog + Estab)", color: "text-indigo-700" },
+            ];
+            document.getElementById("keyStats").innerHTML = stats.map(s => `
+                <div class="bg-stone-50 p-3 rounded-xl text-center border border-stone-200/60">
+                    <span class="text-2xl font-bold ${s.color}">${s.n}</span>
+                    <span class="block text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">${s.label}</span>
+                </div>`).join("");
+        }
+
+        // =============================================================
+        // DIRECTORY
+        // =============================================================
+        function populateContestFilter() {
+            const sel = document.getElementById("contestFilter");
+            Object.entries(categoryGroups).forEach(([group, cats]) => {
+                const og = document.createElement("optgroup");
+                og.label = group;
+                const contests = contestOrder.filter(ct => cats.includes(candidatesData.find(c => c.contest === ct)?.category));
+                contests.forEach(ct => {
+                    const o = document.createElement("option");
+                    o.value = ct; o.textContent = ct;
+                    og.appendChild(o);
+                });
+                if (contests.length) sel.appendChild(og);
+            });
+        }
+
+        function candidateCard(c) {
+            const note = contestNotes[c.contest];
+            return `
+                <div class="bg-stone-50 border border-stone-200 rounded-xl p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-900 leading-tight">${esc(c.name)}</h3>
+                                <div class="mt-1 flex flex-wrap gap-1 items-center">${partyPill(c)}</div>
+                            </div>
+                            <span class="px-2 py-0.5 ${alignColor(c.alignment)} border text-xs font-bold rounded shrink-0 text-right">${esc(c.alignmentBadge)}</span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2 my-2">
+                            <span class="inline-block px-2.5 py-0.5 bg-sky-100 text-sky-900 border border-sky-300 text-xs font-extrabold rounded-full">📊 ${esc(c.polling)}${c.pollingStatus && c.pollingStatus !== c.polling ? ` · ${esc(c.pollingStatus)}` : ""}</span>
+                            <span class="inline-block px-2 py-0.5 ${lgbtqColor(c.lgbtqStance)} text-xs font-semibold rounded">${esc(c.lgbtqBadge)}</span>
+                        </div>
+                        <p class="text-xs text-slate-600 my-2"><strong>Platform:</strong> ${esc(c.platform)}</p>
+                        <p class="text-xs text-slate-500 font-medium my-1"><strong>Race dynamics:</strong> ${esc(c.pollingDetails)}</p>
+                        <div class="text-xs text-slate-500 space-y-1 mt-3 pt-3 border-t border-stone-200/60">
+                            <div><strong>War chest:</strong> ${esc(c.raised)}</div>
+                            <div><strong>Key backers:</strong> ${esc(c.backers)}</div>
+                        </div>
+                    </div>
+                    <button onclick="openModal('${esc(c.id)}')" class="w-full py-2 bg-slate-900 hover:bg-indigo-700 text-white text-xs font-bold rounded-lg transition text-center mt-auto">View Full Research Profile →</button>
+                </div>`;
+        }
+
+        function renderCandidateGrid(data) {
+            const grid = document.getElementById("candidateGrid");
+            document.getElementById("resultCount").textContent = `Showing ${data.length} of ${candidatesData.length} candidates.`;
+            if (!data.length) {
+                grid.innerHTML = `<div class="text-center py-12 text-slate-500 font-medium">No candidates match your search filters.</div>`;
+                return;
+            }
+            let html = "";
+            let lastGroup = null;
+            contestOrder.forEach(ct => {
+                const inContest = data.filter(c => c.contest === ct);
+                if (!inContest.length) return;
+                const group = groupOfCategory[inContest[0].category] || "Other";
+                if (group !== lastGroup) {
+                    html += `<h3 class="text-xs font-extrabold uppercase tracking-widest text-amber-800 pt-2">${esc(group)}</h3>`;
+                    lastGroup = group;
+                }
+                const note = contestNotes[ct];
+                html += `
+                    <div>
+                        <div class="flex flex-wrap items-baseline gap-2 mb-3 border-b border-stone-200 pb-2">
+                            <h4 class="text-base font-bold text-slate-900">${esc(ct)}</h4>
+                            <span class="text-xs text-slate-500">${inContest.length} on ballot${note ? " · " + esc(note) : ""}</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">${inContest.map(candidateCard).join("")}</div>
+                    </div>`;
+            });
+            grid.innerHTML = html;
+        }
+
+        function filterCandidates() {
+            const q = document.getElementById("searchInput").value.toLowerCase().trim();
+            const contestVal = document.getElementById("contestFilter").value;
+            const alignmentVal = document.getElementById("alignmentFilter").value;
+            const lgbtqVal = document.getElementById("lgbtqFilter").value;
+            const partyVal = document.getElementById("partyFilter").value;
+            const filtered = candidatesData.filter(c => {
+                const hay = [c.name, c.platform, c.backers, c.pollingDetails, c.contest, c.endorsements, c.controversy, c.lgbtqDetails].join(" ").toLowerCase();
+                return (!q || hay.includes(q))
+                    && (contestVal === "ALL" || c.contest === contestVal)
+                    && (alignmentVal === "ALL" || c.alignment === alignmentVal)
+                    && (lgbtqVal === "ALL" || c.lgbtqStance === lgbtqVal)
+                    && (partyVal === "ALL" || c.party === partyVal);
+            });
+            renderCandidateGrid(filtered);
+        }
+
+        // =============================================================
+        // COMPARATOR
+        // =============================================================
+        function populateComparatorDropdowns() {
+            const sel1 = document.getElementById("compCandidate1");
+            const sel2 = document.getElementById("compCandidate2");
+            [sel1, sel2].forEach(sel => {
+                sel.innerHTML = "";
+                contestOrder.forEach(ct => {
+                    const og = document.createElement("optgroup");
+                    og.label = ct;
+                    candidatesData.filter(c => c.contest === ct).forEach(c => {
+                        const o = document.createElement("option");
+                        o.value = c.id; o.textContent = `${c.name} (${c.party})`;
+                        og.appendChild(o);
+                    });
+                    sel.appendChild(og);
+                });
+            });
+            const first = candidatesData.find(c => c.category === "Governor" && c.party === "REP") || candidatesData[0];
+            const second = candidatesData.find(c => c.category === "Governor" && c.party === "DEM") || candidatesData[1];
+            sel1.value = first.id; sel2.value = second.id;
+        }
+        function pickSameRace() {
+            const sel1 = document.getElementById("compCandidate1");
+            const sel2 = document.getElementById("compCandidate2");
+            const c1 = candidatesData.find(c => c.id === sel1.value);
+            const rivals = candidatesData.filter(c => c.contest === c1.contest && c.id !== c1.id);
+            if (!rivals.length) return;
+            const idx = rivals.findIndex(c => c.id === sel2.value);
+            sel2.value = rivals[(idx + 1) % rivals.length].id;
+            renderComparison();
+        }
+        function renderComparison() {
+            const c1 = candidatesData.find(c => c.id === document.getElementById("compCandidate1").value);
+            const c2 = candidatesData.find(c => c.id === document.getElementById("compCandidate2").value);
+            document.getElementById("comparisonContainer").innerHTML = buildCompCard(c1) + buildCompCard(c2);
+        }
+        function buildCompCard(c) {
+            if (!c) return "";
+            return `
+                <div class="bg-stone-50 border border-stone-200 rounded-xl p-5 space-y-4">
+                    <div class="border-b border-stone-200 pb-3">
+                        <span class="text-xs font-bold text-amber-800 uppercase tracking-wider block">${esc(c.contest)}</span>
+                        <h3 class="text-xl font-bold text-slate-900">${esc(c.name)}</h3>
+                        <div class="flex flex-wrap gap-2 mt-2 items-center">
+                            ${partyPill(c)}
+                            <span class="px-2.5 py-0.5 bg-sky-100 text-sky-900 border border-sky-300 text-xs font-extrabold rounded">📊 ${esc(c.polling)} · ${esc(c.pollingStatus)}</span>
+                            <span class="px-2.5 py-0.5 ${alignColor(c.alignment)} border text-xs font-bold rounded">${esc(c.alignmentBadge)}</span>
+                            <span class="px-2.5 py-0.5 ${lgbtqColor(c.lgbtqStance)} text-xs font-bold rounded">${esc(c.lgbtqBadge)}</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-xs">
+                        <div><strong class="text-slate-800 block mb-1">📊 Polling &amp; race dynamics</strong><p class="text-slate-600 leading-relaxed font-medium">${esc(c.pollingDetails)}</p></div>
+                        <div><strong class="text-slate-800 block mb-1">📢 Platform</strong><p class="text-slate-600 leading-relaxed">${esc(c.platform)}</p></div>
+                        <div><strong class="text-slate-800 block mb-1">💰 Money &amp; backers</strong><p class="text-slate-600"><strong>Raised:</strong> ${esc(c.raised)}</p><p class="text-slate-600"><strong>Backers:</strong> ${esc(c.backers)}</p></div>
+                        <div><strong class="text-slate-800 block mb-1">🏳️‍🌈 LGBTQ+ &amp; civil rights record</strong><p class="text-slate-600 leading-relaxed">${esc(c.lgbtqDetails)}</p></div>
+                        <div><strong class="text-slate-800 block mb-1">⚠️ Controversy scrutiny</strong><p class="text-slate-600 leading-relaxed">${esc(c.controversy)}</p></div>
+                        <div><strong class="text-slate-800 block mb-1">🌟 Endorsements</strong><p class="text-slate-600 leading-relaxed">${esc(c.endorsements)}</p></div>
+                        ${c.primaryResult && c.primaryResult !== "n/a" ? `<div><strong class="text-slate-800 block mb-1">🗳️ August 18 primary</strong><p class="text-slate-600 leading-relaxed">${esc(c.primaryResult)}</p></div>` : ""}
+                    </div>
+                    <button onclick="openModal('${esc(c.id)}')" class="w-full py-2 bg-slate-900 hover:bg-indigo-700 text-white text-xs font-bold rounded-lg transition">Full profile &amp; sources →</button>
+                </div>`;
+        }
+
+        // =============================================================
+        // MODAL
+        // =============================================================
+        function openModal(candidateId) {
+            const c = candidatesData.find(item => item.id === candidateId);
+            if (!c) return;
+            document.getElementById("modalContent").innerHTML = `
+                <div class="border-b border-stone-200 pb-3 pr-8">
+                    <span class="text-xs font-bold text-amber-800 uppercase tracking-wider block">${esc(c.contest)}</span>
+                    <h2 class="text-2xl font-bold text-slate-900">${esc(c.name)}</h2>
+                    <div class="flex flex-wrap gap-2 mt-2 items-center">
+                        ${partyPill(c)}
+                        <span class="px-3 py-1 bg-sky-100 text-sky-900 border border-sky-300 text-xs font-extrabold rounded-full">📊 ${esc(c.polling)} · ${esc(c.pollingStatus)}</span>
+                        <span class="px-2.5 py-1 ${alignColor(c.alignment)} border text-xs font-bold rounded-full">${esc(c.alignmentBadge)}</span>
+                        <span class="px-2.5 py-1 ${lgbtqColor(c.lgbtqStance)} text-xs font-bold rounded-full">${esc(c.lgbtqBadge)}</span>
+                    </div>
+                </div>
+                <div class="space-y-4 text-sm text-slate-700">
+                    <div class="bg-sky-50 p-3 rounded-lg border border-sky-200">
+                        <h4 class="font-bold text-sky-900 mb-1">Polling &amp; Race Dynamics</h4>
+                        <p class="text-xs text-sky-800 leading-relaxed font-medium">${esc(c.pollingDetails)}</p>
+                        ${c.primaryResult && c.primaryResult !== "n/a" ? `<p class="text-xs text-sky-800 mt-1"><strong>August 18 primary:</strong> ${esc(c.primaryResult)}</p>` : ""}
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-1">Background &amp; Platform</h4>
+                        <p class="bg-stone-50 p-3 rounded-lg border border-stone-200 leading-relaxed text-xs">${esc(c.platform)}</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+                            <h4 class="font-bold text-slate-900 mb-1">Money &amp; Alignment</h4>
+                            <p class="text-xs text-slate-600"><strong>Party:</strong> ${esc(partyLabel(c.party))}${c.incumbent ? " (incumbent)" : ""}</p>
+                            <p class="text-xs text-slate-600 mt-1"><strong>Lane:</strong> ${esc(c.alignment)}${c.alignmentNote ? ` <span class="text-slate-500">(${esc(c.alignmentNote)})</span>` : ""}</p>
+                            <p class="text-xs text-slate-600 mt-1"><strong>Raised:</strong> ${esc(c.raised)}</p>
+                            <p class="text-xs text-slate-600 mt-1"><strong>Backers:</strong> ${esc(c.backers)}</p>
+                        </div>
+                        <div class="bg-stone-50 p-3 rounded-lg border border-stone-200">
+                            <h4 class="font-bold text-slate-900 mb-1">LGBTQ+ &amp; Civil Rights</h4>
+                            <p class="text-xs text-slate-600">${esc(c.lgbtqDetails)}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-1">Controversies &amp; Scrutiny</h4>
+                        <p class="bg-rose-50/60 p-3 rounded-lg border border-rose-200 text-rose-900 text-xs leading-relaxed">${esc(c.controversy)}</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-1">Endorsements</h4>
+                        <p class="bg-stone-50 p-3 rounded-lg border border-stone-200 text-xs text-slate-600">${esc(c.endorsements)}</p>
+                    </div>
+                    <details class="bg-stone-50 rounded-lg border border-stone-200">
+                        <summary class="p-3 text-xs font-bold text-slate-700"><span class="chev mr-1">▸</span> Sources (${(c.sources || []).length})</summary>
+                        <div class="px-3 pb-3">${sourcesList(c.sources)}</div>
+                    </details>
+                </div>`;
+            const m = document.getElementById("candidateModal");
+            m.classList.remove("hidden"); m.classList.add("flex");
+            document.body.style.overflow = "hidden";
+        }
+        function closeModal() {
+            const m = document.getElementById("candidateModal");
+            m.classList.add("hidden"); m.classList.remove("flex");
+            document.body.style.overflow = "";
+        }
+
+        // =============================================================
+        // BALLOT QUESTIONS
+        // =============================================================
+        function measureCard(m, statewide) {
+            const yesLabel = m.type === "Bond Referendum" ? "Yes – For Bonds" : "Yes";
+            const noLabel = m.type === "Bond Referendum" ? "No – Against Bonds" : "No";
+            return `
+                <div class="bg-stone-50 border border-stone-200 rounded-xl p-5 space-y-3 ${statewide ? "border-l-4 border-l-emerald-500" : "border-l-4 border-l-indigo-400"}">
+                    <div class="flex flex-wrap items-start justify-between gap-2">
+                        <div>
+                            <span class="text-xs font-bold text-amber-800 uppercase tracking-wider block">${esc(m.scope)} · ${esc(m.type)}</span>
+                            <h4 class="text-base font-bold text-slate-900 leading-snug">${esc(m.number)}: ${esc(m.title)}</h4>
+                        </div>
+                        <div class="flex flex-wrap gap-1">
+                            <span class="px-2 py-0.5 bg-stone-200 text-slate-700 text-[10px] font-bold rounded">${esc(m.threshold)}</span>
+                            ${m.polling && m.polling !== "No public poll" ? `<span class="px-2 py-0.5 bg-sky-100 text-sky-900 border border-sky-300 text-[10px] font-bold rounded">📊 Polled (see below)</span>` : ""}
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-700 leading-relaxed"><strong>A YES vote:</strong> ${esc(m.plainSummary)}</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                        <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg"><strong class="block text-emerald-900 mb-1">✅ Case for ${esc(yesLabel)}</strong><p class="text-emerald-900/90 leading-relaxed">${esc(m.argumentsFor)}</p><p class="mt-2 text-emerald-800"><strong>Supporters:</strong> ${esc(m.supporters)}</p></div>
+                        <div class="p-3 bg-rose-50 border border-rose-200 rounded-lg"><strong class="block text-rose-900 mb-1">❌ Case for ${esc(noLabel)}</strong><p class="text-rose-900/90 leading-relaxed">${esc(m.argumentsAgainst)}</p><p class="mt-2 text-rose-800"><strong>Opponents:</strong> ${esc(m.opponents)}</p></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-slate-600">
+                        <p><strong>How it got on the ballot:</strong> ${esc(m.origin)}</p>
+                        <p><strong>Fiscal impact:</strong> ${esc(m.fiscalImpact)}</p>
+                    </div>
+                    ${m.pinellasNote ? `<p class="text-xs text-indigo-900 bg-indigo-50 border border-indigo-200 rounded-lg p-3"><strong>Pinellas angle:</strong> ${esc(m.pinellasNote)}</p>` : ""}
+                    ${m.polling && m.polling !== "No public poll" ? `<p class="text-xs text-slate-600"><strong>Polling:</strong> ${esc(m.polling)}</p>` : ""}
+                    <details class="bg-white rounded-lg border border-stone-200">
+                        <summary class="p-3 text-xs font-bold text-slate-700"><span class="chev mr-1">▸</span> Exact ballot language</summary>
+                        <div class="px-3 pb-3 text-xs text-slate-700 leading-relaxed space-y-2">${(m.fullText || "Not available.").split("\n\n").map(p => `<p>${esc(p)}</p>`).join("")}<p class="font-bold">☐ ${esc(yesLabel)} &nbsp; ☐ ${esc(noLabel)}</p></div>
+                    </details>
+                    <details class="bg-white rounded-lg border border-stone-200">
+                        <summary class="p-3 text-xs font-bold text-slate-700"><span class="chev mr-1">▸</span> Sources (${(m.sources || []).length})</summary>
+                        <div class="px-3 pb-3">${sourcesList(m.sources)}</div>
+                    </details>
+                </div>`;
+        }
+        function renderMeasures() {
+            const sel = document.getElementById("measureScopeFilter");
+            const scopes = [...new Set(measuresData.filter(m => m.scope !== "Statewide").map(m => m.scope))];
+            if (sel.options.length === 1) {
+                scopes.forEach(s => { const o = document.createElement("option"); o.value = s; o.textContent = `Statewide + ${s}`; sel.appendChild(o); });
+                const o = document.createElement("option"); o.value = "STATEWIDE_ONLY"; o.textContent = "Statewide only"; sel.appendChild(o);
+            }
+            const val = sel.value;
+            const sw = measuresData.filter(m => m.scope === "Statewide");
+            document.getElementById("statewideMeasures").innerHTML = `
+                <h3 class="text-xs font-extrabold uppercase tracking-widest text-amber-800">Statewide constitutional amendments (on every ballot)</h3>
+                ${sw.map(m => measureCard(m, true)).join("")}`;
+            const muni = measuresData.filter(m => m.scope !== "Statewide" && (val === "ALL" || val === m.scope));
+            let html = "";
+            if (val !== "STATEWIDE_ONLY") {
+                scopes.filter(s => val === "ALL" || val === s).forEach(s => {
+                    const items = muni.filter(m => m.scope === s);
+                    if (!items.length) return;
+                    html += `<div class="space-y-4"><h3 class="text-xs font-extrabold uppercase tracking-widest text-amber-800">${esc(s)} (${items.length} question${items.length > 1 ? "s" : ""}, only on ${esc(s)} ballots)</h3>${items.map(m => measureCard(m, false)).join("")}</div>`;
+                });
+            }
+            document.getElementById("municipalMeasures").innerHTML = html;
+        }
+
+        // =============================================================
+        // JUDICIAL RETENTION
+        // =============================================================
+        function renderJudicial() {
+            document.getElementById("judicialGrid").innerHTML = judicialData.map(j => `
+                <div class="bg-stone-50 border border-stone-200 rounded-xl p-5 space-y-3 flex flex-col">
+                    <div>
+                        <span class="text-xs font-bold text-amber-800 uppercase tracking-wider block">${esc(j.court)}</span>
+                        <h3 class="text-lg font-bold text-slate-900">${esc(j.name)}</h3>
+                        <p class="text-xs text-slate-500">Appointed by ${esc(j.appointedBy)}</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-0.5 bg-stone-200 text-slate-700 text-xs font-bold rounded">Retain? Yes / No</span>
+                    </div>
+                    <div class="text-xs text-slate-700 space-y-2 flex-grow">
+                        <p class="bg-sky-50 border border-sky-200 rounded-lg p-2 text-sky-900"><strong>Florida Bar poll:</strong> ${esc(j.barPoll)}</p>
+                        <p><strong>Background:</strong> ${esc(j.background)}</p>
+                        <p><strong>Notable opinions:</strong> ${esc(j.notableOpinions)}</p>
+                        <p><strong>Positions &amp; recommendations:</strong> ${esc(j.positions)}</p>
+                        <p><strong>LGBTQ+ / civil rights note:</strong> ${esc(j.lgbtqNote)}</p>
+                    </div>
+                    <details class="bg-white rounded-lg border border-stone-200">
+                        <summary class="p-2 text-xs font-bold text-slate-700"><span class="chev mr-1">▸</span> Sources (${(j.sources || []).length})</summary>
+                        <div class="px-3 pb-3">${sourcesList(j.sources)}</div>
+                    </details>
+                </div>`).join("");
+        }
+
+        // =============================================================
+        // LGBTQ+ MATRIX (derived from candidate data)
+        // =============================================================
+        function renderLgbtqMatrix() {
+            const order = { "Vanguard": 0, "Consistent Support": 1, "Opposed / Culture War": 2 };
+            const rows = candidatesData.filter(c => c.lgbtqStance in order)
+                .sort((a, b) => order[a.lgbtqStance] - order[b.lgbtqStance] || contestOrder.indexOf(a.contest) - contestOrder.indexOf(b.contest));
+            document.getElementById("lgbtqTableBody").innerHTML = rows.map(c => `
+                <tr class="hover:bg-amber-50/50 transition align-top">
+                    <td class="p-3 font-bold text-slate-900 whitespace-nowrap"><button class="hover:underline text-left" onclick="openModal('${esc(c.id)}')">${esc(c.name)}</button><div class="mt-1">${partyPill(c)}</div></td>
+                    <td class="p-3 text-slate-600 text-xs">${esc(c.contest)}</td>
+                    <td class="p-3"><span class="inline-block px-2 py-0.5 ${alignColor(c.alignment)} border text-xs font-bold rounded">${esc(c.alignmentBadge)}</span></td>
+                    <td class="p-3 font-bold text-sky-700 text-xs whitespace-nowrap">${esc(c.polling)}</td>
+                    <td class="p-3"><span class="px-2 py-1 ${lgbtqColor(c.lgbtqStance)} text-xs font-bold rounded whitespace-nowrap">${esc(c.lgbtqBadge)}</span></td>
+                    <td class="p-3 text-slate-700 text-xs min-w-[18rem]">${esc(c.lgbtqDetails)}</td>
+                    <td class="p-3 text-xs text-slate-600">${esc(c.backers)}</td>
+                </tr>`).join("");
+        }
+
+        // =============================================================
+        // CONTROVERSY RADAR
+        // =============================================================
+        function renderControversies() {
+            const border = { rose: "border-rose-500", amber: "border-amber-500", indigo: "border-indigo-500", slate: "border-slate-500", emerald: "border-emerald-500" };
+            const chip = { rose: "bg-rose-100 text-rose-800", amber: "bg-amber-100 text-amber-800", indigo: "bg-indigo-100 text-indigo-800", slate: "bg-slate-200 text-slate-800", emerald: "bg-emerald-100 text-emerald-800" };
+            document.getElementById("controversyGrid").innerHTML = controversies.map(k => `
+                <div class="p-5 bg-stone-50 rounded-xl border-l-4 ${border[k.color] || border.slate} shadow-sm border-stone-200">
+                    <div class="flex justify-between items-start gap-2 mb-2">
+                        <h3 class="font-bold text-slate-900 text-base">${k.candidateId ? `<button class="hover:underline text-left" onclick="openModal('${esc(k.candidateId)}')">${esc(k.who)}</button>` : esc(k.who)}</h3>
+                        <span class="px-2 py-0.5 ${chip[k.color] || chip.slate} text-xs font-bold rounded text-right">${esc(k.tag)}</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">${esc(k.text)}</p>
+                    <span class="text-xs text-slate-500 font-medium">Source: ${k.url ? `<a class="underline" href="${esc(k.url)}" target="_blank" rel="noopener">${esc(k.source)}</a>` : esc(k.source)}</span>
+                </div>`).join("");
+        }
+
+        // =============================================================
+        // INSIGHT CARDS
+        // =============================================================
+        function renderInsightCards(containerId, items) {
+            const palette = { sky: "bg-sky-50 border-sky-200 text-sky-900", teal: "bg-teal-50 border-teal-200 text-teal-900", purple: "bg-purple-50 border-purple-200 text-purple-900", amber: "bg-amber-50 border-amber-200 text-amber-900", indigo: "bg-indigo-50 border-indigo-200 text-indigo-900", emerald: "bg-emerald-50 border-emerald-200 text-emerald-900", rose: "bg-rose-50 border-rose-200 text-rose-900" };
+            document.getElementById(containerId).innerHTML = items.map(i => `
+                <div class="p-4 rounded-xl border text-xs ${palette[i.color] || palette.sky}">
+                    <strong class="block font-bold text-sm mb-1">${esc(i.title)}</strong>${esc(i.text)}
+                </div>`).join("");
+        }
+
+        // =============================================================
+        // CHARTS
+        // =============================================================
+        function chartShell(gridId, ch) {
+            const grid = document.getElementById(gridId);
+            const wrap = document.createElement("div");
+            wrap.className = "bg-stone-50 p-5 rounded-xl border border-stone-200 flex flex-col";
+            wrap.innerHTML = `<h3 class="font-bold text-slate-900 text-base mb-1">${esc(ch.title)}</h3><p class="text-slate-500 text-xs mb-4">${esc(ch.subtitle)}</p><div class="chart-container"><canvas id="${esc(ch.id)}" role="img" aria-label="${esc(ch.title)}"></canvas></div>`;
+            grid.appendChild(wrap);
+            return document.getElementById(ch.id).getContext("2d");
+        }
+        function initCharts() {
+            pollCharts.forEach(ch => {
+                const ctx = chartShell("pollChartGrid", ch);
+                new Chart(ctx, {
+                    type: "bar",
+                    data: { labels: ch.labels, datasets: ch.datasets.map(d => ({ label: d.label, data: d.data, backgroundColor: d.colors || d.color })) },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: { legend: { display: ch.datasets.length > 1, position: "top" }, tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${c.raw}%` } } },
+                        scales: { y: { beginAtZero: true, max: ch.ymax || 60, ticks: { callback: (v) => v + "%" } } }
+                    }
+                });
+            });
+            finCharts.forEach(ch => {
+                const ctx = chartShell("finChartGrid", ch);
+                new Chart(ctx, {
+                    type: "bar",
+                    data: { labels: ch.labels, datasets: ch.datasets.map(d => ({ label: d.label, data: d.data, backgroundColor: d.colors || d.color })) },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        indexAxis: ch.horizontal ? "y" : "x",
+                        plugins: { legend: { display: ch.datasets.length > 1, position: "top" }, tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${money(c.raw)}` } } },
+                        scales: { [ch.horizontal ? "x" : "y"]: { beginAtZero: true, ticks: { callback: (v) => v >= 1000000 ? "$" + (v / 1000000) + "M" : "$" + (v / 1000) + "k" } } }
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>

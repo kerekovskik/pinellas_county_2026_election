@@ -1,0 +1,24 @@
+[
+  {
+    "id": "statewidePollChart",
+    "title": "Statewide Races: Republican vs. Democrat (%)",
+    "subtitle": "Governor and U.S. Senate use the UNF likely-voter poll (Oct 12–19, n=1,471, ±2.8). Attorney General and CFO use St. Pete Polls for Florida Politics (Oct 5–7, n=836, ±3.4). Agriculture uses the only public poll, Targoz/JMI (Sep 28–Oct 4, n=847).",
+    "labels": ["Governor", "U.S. Senate", "Attorney General", "CFO", "Agriculture"],
+    "ymax": 60,
+    "datasets": [
+      { "label": "Republican", "data": [49, 49, 45, 44, 50], "color": "#be123c" },
+      { "label": "Democrat", "data": [47, 45, 43, 42, 39], "color": "#1d4ed8" }
+    ]
+  },
+  {
+    "id": "congressPollChart",
+    "title": "Congressional Districts 13 & 16: Partisan Polls Only (%)",
+    "subtitle": "No independent public poll exists for either seat. CD 13 shows the Democratic House Majority PAC/Hart poll (Aug 25–27) and the Republican Fabrizio Lee poll (Aug 4–6). CD 16 shows the Democratic-sponsored PPP poll (Oct 1–2, n=530). Treat partisan polls as upper bounds for the sponsor's side.",
+    "labels": ["CD13 (D poll)", "CD13 (R poll)", "CD16 (D poll)"],
+    "ymax": 60,
+    "datasets": [
+      { "label": "Republican (Luna / Gruters)", "data": [46, 49, 43], "color": "#be123c" },
+      { "label": "Democrat (Gray / Kirschner)", "data": [51, 41, 39], "color": "#1d4ed8" }
+    ]
+  }
+]
